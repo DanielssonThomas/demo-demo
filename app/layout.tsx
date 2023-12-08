@@ -1,5 +1,7 @@
-import { GeistSans } from "geist/font/sans";
+import {GeistSans} from "geist/font/sans";
 import "./globals.css";
+import NavBar from "@/components/NavBar";
+import Footer from "@/components/Footer";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -11,17 +13,15 @@ export const metadata = {
   description: "The fastest way to build apps with Next.js and Supabase",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+//TODO check if user is signed in, only then show footer and navbar
+
+export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={GeistSans.className}>
       <body className="bg-background text-foreground">
-        <main className="min-h-screen flex flex-col items-center">
-          {children}
-        </main>
+        <NavBar />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );
