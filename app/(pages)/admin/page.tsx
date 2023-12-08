@@ -1,10 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
-import NavBar from "@/components/NavBar";
-import Table from "@/components/admin/table";
+import Controller from "@/components/admin/controller";
 
 const Admin = () => {
-  const [events, setEvents] = useState<ClientEvent[] | null>(null);
+  const [events, setEvents] = useState<TableClientEvent[] | null>(null);
   const [users, setUsers] = useState<User[] | null>(null);
 
   const getEvents = async () => {
@@ -30,7 +29,7 @@ const Admin = () => {
 
   return events ? (
     <div className="w-full h-screen bg-[#EDEDED]">
-      <Table Events={events} Users={users} show="all" showVerified={null} />
+      <Controller Events={events} Users={users} />
     </div>
   ) : (
     <></>

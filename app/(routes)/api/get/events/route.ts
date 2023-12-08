@@ -24,11 +24,11 @@ export async function GET(request: Request) {
   const {
     data: events,
     error,
-  }: { data: Event[] | null; error: PostgrestError | null } = await supabase
-    .from("Event")
-    .select("*");
+  }: { data: TableClientEvent[] | null; error: PostgrestError | null } =
+    await supabase.from("Event").select("*, Location(name, address)");
 
   if (error) {
+    console.log(error);
     return NextResponse.json({ data: events, error: true });
   }
 
