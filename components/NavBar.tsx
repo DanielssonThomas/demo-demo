@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LogOutButton from "./buttons/logoutButton";
 
 const NavBar = () => {
   return (
@@ -7,6 +8,13 @@ const NavBar = () => {
       <Link href={"/dashboard"}>
         <p>Home</p>
       </Link>
+      <Link href={"/client/create-event"}>
+        <p>Create event</p>
+      </Link>
+      <Link href={"/admin"}>
+        <p>Admin page</p>
+      </Link>
+      <LogOutButton />
     </nav>
   );
 };
