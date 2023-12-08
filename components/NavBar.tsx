@@ -1,5 +1,5 @@
 import Link from "next/link";
-import LogOutButton from "./buttons/logoutButton";
+import LogOutButton from "./buttons/LogoutButton";
 
 const NavBar = () => {
   return (
