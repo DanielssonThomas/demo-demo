@@ -4,8 +4,6 @@ import {createClient} from "@/utils/supabase/server";
 
 const LogOutButton = () => {
   const signOut = async () => {
-    "use server";
-
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
     await supabase.auth.signOut();
