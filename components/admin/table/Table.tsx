@@ -30,6 +30,7 @@ export const Table = (TableProps: TableProps) => {
               date={event.date ?? "-"}
               product_name={event.product_name ?? "-"}
               verified={event.verified ?? false}
+              id={event.id}
             />
           ))
         : Events?.map((event) => (
@@ -41,6 +42,7 @@ export const Table = (TableProps: TableProps) => {
               date={event.date ?? "-"}
               product_name={event.product_name ?? "-"}
               verified={event.verified ?? false}
+              id={event.id}
             />
           ));
 
@@ -68,6 +70,7 @@ export const Table = (TableProps: TableProps) => {
               role={user.role ?? "-"}
               type="User"
               verified={user.verified ? user.verified : false}
+              id={user.id}
             />
           )
         )
@@ -77,6 +80,7 @@ export const Table = (TableProps: TableProps) => {
             role={user.role ?? "-"}
             type="User"
             verified={user.verified ? user.verified : false}
+            id={user.id}
           />
         ));
 

@@ -16,7 +16,6 @@ const Dashboard = async () => {
     .from("User")
     .select("id")
     .match({ user_id: user.id });
-  console.log("data: ", data);
 
   return data?.length !== 0 ? (
     <>

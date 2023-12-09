@@ -12,7 +12,6 @@ const UserSetup = () => {
       body: e,
     });
     const res = await data.json();
-    console.log(res);
     if (res.message === null) router.refresh();
     setErrorMessage(res.message);
   };
