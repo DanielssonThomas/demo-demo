@@ -27,12 +27,8 @@ const Admin = ({
   };
 
   const getEvent = async () => {
-    const data = await fetch("/api/post/event", {
-      method: "POST",
-      body: JSON.stringify({ id: searchParams.id }),
-    });
-    const res = await data.json();
-    setEvent(res.data);
+    const event = events?.find(({ id }) => id == searchParams.id);
+    setEvent(event ?? null);
   };
 
   const getUsers = async () => {
@@ -44,17 +40,16 @@ const Admin = ({
   };
 
   const getUser = async () => {
-    const data = await fetch("/api/post/user", {
-      method: "POST",
-      body: JSON.stringify({ id: searchParams.id }),
-    });
-    const res = await data.json();
-    setUser(res.data);
+    const user = users?.find(({ id }) => id == searchParams.id);
+    setUser(user ?? null);
   };
 
   useEffect(() => {
     getEvents();
     getUsers();
+  }, []);
+
+  useEffect(() => {
     if (searchParams.type !== null) {
       if (searchParams.type === "event") getEvent();
       if (searchParams.type === "user") getUser();
