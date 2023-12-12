@@ -12,53 +12,63 @@ export interface Database {
       Event: {
         Row: {
           active: boolean | null
-          client: string | null
+          client: string
           comment: string | null
           date: string | null
           demonstrator: string | null
+          end_time: string | null
           id: number
           location_id: number | null
           product_name: string | null
           product_stock: number | null
+          start_time: string | null
           supplier: string | null
-          time: string | null
           travels_cost: number | null
           units_used: number | null
           verified: boolean | null
         }
         Insert: {
           active?: boolean | null
-          client?: string | null
+          client: string
           comment?: string | null
           date?: string | null
           demonstrator?: string | null
+          end_time?: string | null
           id?: number
           location_id?: number | null
           product_name?: string | null
           product_stock?: number | null
+          start_time?: string | null
           supplier?: string | null
-          time?: string | null
           travels_cost?: number | null
           units_used?: number | null
           verified?: boolean | null
         }
         Update: {
           active?: boolean | null
-          client?: string | null
+          client?: string
           comment?: string | null
           date?: string | null
           demonstrator?: string | null
+          end_time?: string | null
           id?: number
           location_id?: number | null
           product_name?: string | null
           product_stock?: number | null
+          start_time?: string | null
           supplier?: string | null
-          time?: string | null
           travels_cost?: number | null
           units_used?: number | null
           verified?: boolean | null
         }
         Relationships: [
+          {
+            foreignKeyName: "Event_client_fkey"
+            columns: ["client"]
+            isOneToOne: false
+            referencedRelation: "User"
+            referencedColumns: ["name"]
+          },
           {
             foreignKeyName: "Event_location_id_fkey"
             columns: ["location_id"]
@@ -72,22 +82,40 @@ export interface Database {
         Row: {
           address: string | null
           client_id: number | null
+          client_name: string | null
           id: number
           name: string | null
         }
         Insert: {
           address?: string | null
           client_id?: number | null
+          client_name?: string | null
           id?: number
           name?: string | null
         }
         Update: {
           address?: string | null
           client_id?: number | null
+          client_name?: string | null
           id?: number
           name?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "Location_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "User"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "Location_client_name_fkey"
+            columns: ["client_name"]
+            isOneToOne: false
+            referencedRelation: "User"
+            referencedColumns: ["name"]
+          }
+        ]
       }
       User: {
         Row: {
@@ -111,7 +139,15 @@ export interface Database {
           user_id?: string | null
           verified?: boolean | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "User_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
       }
     }
     Views: {

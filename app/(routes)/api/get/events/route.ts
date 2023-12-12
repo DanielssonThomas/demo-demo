@@ -11,7 +11,7 @@ export async function GET(request: Request) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
+  if (user === null) return NextResponse.redirect(`${requestUrl.origin}/`);
   const { data: profile }: { data: User | null } = await supabase
     .from("User")
     .select("*")
@@ -19,7 +19,7 @@ export async function GET(request: Request) {
     .single();
 
   if (profile?.role !== "admin")
-    return NextResponse.redirect(`${requestUrl.origin}/`);
+    return NextResponse.json({ data: null, error: null, unauth: true });
 
   const {
     data: events,

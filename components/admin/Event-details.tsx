@@ -1,4 +1,5 @@
-import { useRouter } from "next/navigation";
+import { useRouter, redirect } from "next/navigation";
+import { useState, useEffect } from "react";
 
 type EventDetailsProps = {
   id: number;
@@ -6,10 +7,16 @@ type EventDetailsProps = {
   address: string;
   client: string;
   date: string;
+  comment: string;
   product_name: string;
   supplier: string;
   product_stock: number;
   units_used: number | null;
+  start_time: string | null;
+  end_time: string | null;
+  travels_cost: number | null;
+  verified: boolean | null;
+  active: boolean | null;
 };
 
 const EventDetails = ({
@@ -18,69 +25,183 @@ const EventDetails = ({
   address,
   client,
   date,
+  comment,
   product_name,
   supplier,
   product_stock,
   units_used,
+  start_time,
+  end_time,
+  travels_cost,
+  verified,
+  active,
 }: EventDetailsProps) => {
   const router = useRouter();
-  const verifyEvent = async () => {
-    const data = await fetch("/api/post/verify-event", {
-      method: "POST",
-      body: JSON.stringify({ id: id }),
+  const [locations, setLocations] = useState<DBLocation[] | null>(null);
+  const [formAddress, setFormAddress] = useState<string | null>(address);
+
+  const [startTime, setStartTime] = useState<string | null>(start_time);
+  const [endTime, setEndTime] = useState<string | null>(end_time);
+  const [formVerified, setFormVerified] = useState<boolean | null>(verified);
+  const [formActive, setFormActive] = useState<boolean | null>(active);
+
+  const getLocations = async () => {
+    const LocationsData = await fetch("/api/get/locations", {
+      method: "GET",
     });
-    const res = await data.json();
-    router.back();
+    const LocationsDataRes = await LocationsData.json();
+    const locationsSortByClient = LocationsDataRes.data.filter(
+      (location: DBLocation) => location.client_name === client
+    );
+
+    setLocations(locationsSortByClient);
   };
+
+  useEffect(() => {
+    getLocations();
+  }, []);
+
+  const updateEvent = async (e: FormData) => {
+    const data = await fetch("/api/post/update-event", {
+      method: "POST",
+      body: e,
+    });
+    redirect("/admin");
+  };
+
   return (
     <div className="absolute">
       <div
         className="fixed w-[100vw] h-[100vh] top-0 left-0 bg-white opacity-50 z-20"
         onClick={() => router.back()}
       />
-      <section className="fixed top-[25vh] right-[12.5vw] left-[12.5vw] bottom-0 w-3/4 h-2/4 border-solid border-black rounded-md bg-[#EDEDED] text-black p-4 z-40">
-        <section className="flex flex-col justify-center items-center gap-4">
-          <div className="text-center">
-            <h2 className="text-xl underline">EVENT</h2>
+      <section className="fixed top-[12.5vh] right-[25vw] left-[25vw] bottom-0 w-1/2 h-3/4 border-[1px] border-solid border-black rounded-md bg-[#EDEDED] text-black p-4 z-40">
+        <div className="text-center">
+          <h2 className="text-xl underline">CLIENT</h2>
+        </div>
+        <form action={(e) => updateEvent(e)}>
+          <input type="hidden" name="id" value={id} />
+          <div className="flex gap-2">
+            <h3 className="font-bold">Clients:</h3>
+            <p>{client}</p>
           </div>
-          <ul className="w-3/4">
-            <div className="flex gap-4">
-              <li className="font-bold w-1/2">Client:</li>
-              <p className="w-full">{client}</p>
+          <div>
+            <label htmlFor="location" className="font-bold">
+              Locations:
+            </label>
+            <select
+              name="location_id"
+              className="bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm"
+              onChange={(e) => {
+                setFormAddress(e.target.value);
+              }}
+            >
+              {locations?.map((loc) => (
+                <option value={loc.id ?? ""}>{loc.name}</option>
+              ))}
+            </select>
+          </div>
+          <div className="flex gap-2">
+            <h3 className="font-bold">Address:</h3>
+            <p>{formAddress}</p>
+          </div>
+          <section className="flex gap-2 ">
+            <div className="flex gap-2">
+              <h3 className="font-bold">Date:</h3>
+              <input
+                name="date"
+                type="date"
+                value={date}
+                className="bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm"
+              />
             </div>
-            <div className="flex gap-4">
-              <li className="font-bold w-1/2">Supplier:</li>
-              <p className="w-full">{supplier}</p>
+            <div className="flex gap-2">
+              <h3 className="font-bold">Start time:</h3>
+              <input
+                name="start_time"
+                type="time"
+                value={startTime ?? ""}
+                className="bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm"
+                onChange={(e) => {
+                  setStartTime(e.target.value);
+                }}
+              />
             </div>
-            <div className="flex gap-4">
-              <li className="font-bold w-1/2">Location:</li>
-              <p className="w-full">{location}</p>
+            <div className="flex gap-2">
+              <h3 className="font-bold">End time:</h3>
+              <input
+                name="end_time"
+                type="time"
+                value={endTime ?? ""}
+                className="bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm"
+                onChange={(e) => {
+                  setEndTime(e.target.value);
+                }}
+              />
             </div>
-            <div className="flex gap-4">
-              <li className="font-bold w-1/2">Address:</li>
-              <p className="w-full">{address}</p>
+          </section>
+          <div className="flex gap-2">
+            <h3 className="font-bold">Product name:</h3>
+            <p>{product_name}</p>
+          </div>
+          <div className="flex gap-2">
+            <h3 className="font-bold">Supplier:</h3>
+            <p>{supplier}</p>
+          </div>
+          <section className="flex gap-2">
+            <div className="flex gap-2">
+              <h3 className="font-bold">Stock:</h3>
+              <p>{product_stock}</p>
             </div>
-            <div className="flex gap-4">
-              <li className="font-bold w-1/2">Date:</li>
-              <p className="w-full">{date}</p>
+            <div className="flex gap-2">
+              <h3 className="font-bold">units used:</h3>
+              <input
+                type="number"
+                name="units_used"
+                min={0}
+                max={product_stock}
+                value={units_used ?? 0}
+                className="bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm pl-2"
+              />
             </div>
-            <div className="flex gap-4">
-              <li className="font-bold w-1/2">Product Name:</li>
-              <p className="w-full">{product_name}</p>
-            </div>
-            <div className="flex gap-4">
-              <li className="font-bold w-1/2">Stock:</li>
-              <p className="w-full">{product_stock}</p>
-            </div>
-            <div className="flex gap-4">
-              <li className="font-bold w-1/2">Units used:</li>
-              <p className="w-full">{units_used}</p>
-            </div>
-          </ul>
-          <button className="hover:underline" onClick={verifyEvent}>
-            Verify event
+          </section>
+          <div className="flex flex-col gap-2">
+            <h3 className="font-bold">Comment:</h3>
+            <textarea
+              name="comment"
+              placeholder={comment === "" ? "No comment" : ""}
+            >
+              {comment}
+            </textarea>
+          </div>
+          <div className="flex gap-2">
+            <h3 className="font-bold">Travel cost:</h3>
+            <p>{travels_cost === null ? "Not entered" : travels_cost}</p>
+          </div>
+          <div className="flex gap-2">
+            <h3 className="font-bold">Verified:</h3>
+            <input
+              type="checkbox"
+              name="verified"
+              id=""
+              checked={formVerified ?? false}
+              onClick={() => setFormVerified(!formVerified)}
+            />
+          </div>
+          <div className="flex gap-2">
+            <h3 className="font-bold">Active:</h3>
+            <input
+              type="checkbox"
+              name="active"
+              id=""
+              checked={formActive ?? false}
+              onClick={() => setFormActive(!formActive)}
+            />
+          </div>
+          <button className="absolute right-8 bottom-8 bg-[#dbdbdb] border-[1px] border-black border-solid rounded-md px-4 py-2">
+            Save changes
           </button>
-        </section>
+        </form>
       </section>
     </div>
   );

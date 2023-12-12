@@ -1,4 +1,5 @@
-import Row from "./Row";
+import { EventsTable } from "./versions/Events";
+import { UsersTable } from "./versions/Users";
 
 type EventTableProps = {
   show: "events";
@@ -16,82 +17,20 @@ type TableProps = EventTableProps | UserTableProps;
 
 export const Table = (TableProps: TableProps) => {
   if (TableProps.show === "events") {
-    const Events = TableProps.Events;
-    const renderEvents =
-      TableProps.showVerified !== null
-        ? Events?.filter(
-            (event) => event.verified === TableProps.showVerified
-          ).map((event) => (
-            <Row
-              type="Event"
-              client={event.client ?? "-"}
-              location={event.Location?.name ?? "-"}
-              address={event.Location?.address ?? "-"}
-              date={event.date ?? "-"}
-              product_name={event.product_name ?? "-"}
-              verified={event.verified ?? false}
-              id={event.id}
-            />
-          ))
-        : Events?.map((event) => (
-            <Row
-              type="Event"
-              client={event.client ?? "-"}
-              location={event.Location?.name ?? "-"}
-              address={event.Location?.address ?? "-"}
-              date={event.date ?? "-"}
-              product_name={event.product_name ?? "-"}
-              verified={event.verified ?? false}
-              id={event.id}
-            />
-          ));
-
     return (
-      <table className="w-full text-black">
-        <tr>
-          <th>Client</th>
-          <th>Location</th>
-          <th>Address</th>
-          <th>Date</th>
-          <th>Product Name</th>
-          <th>verified</th>
-        </tr>
-        {renderEvents}
-      </table>
+      <EventsTable
+        events={TableProps.Events}
+        showVerified={TableProps.showVerified}
+      />
     );
   }
-  const Users = TableProps.Users;
-  const renderUsers =
-    TableProps.showVerified !== null
-      ? Users?.filter((user) => user.verified === TableProps.showVerified).map(
-          (user) => (
-            <Row
-              name={user.name ?? "-"}
-              role={user.role ?? "-"}
-              type="User"
-              verified={user.verified ? user.verified : false}
-              id={user.id}
-            />
-          )
-        )
-      : Users?.map((user) => (
-          <Row
-            name={user.name ?? "-"}
-            role={user.role ?? "-"}
-            type="User"
-            verified={user.verified ? user.verified : false}
-            id={user.id}
-          />
-        ));
 
-  return (
-    <table className="w-full text-black">
-      <tr>
-        <th>Name</th>
-        <th>Role</th>
-        <th>Verified</th>
-      </tr>
-      {renderUsers}
-    </table>
-  );
+  if (TableProps.show === "users") {
+    return (
+      <UsersTable
+        Users={TableProps.Users}
+        showVerified={TableProps.showVerified}
+      />
+    );
+  }
 };

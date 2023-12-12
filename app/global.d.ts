@@ -13,12 +13,20 @@ declare global {
     product_name: string | null;
     product_stock: number | null;
     supplier: string | null;
-    time: string | null;
     travels_cost: number | null;
     units_used: number | null;
     verified: boolean | null;
     Location: { name: string; address: string };
+    start_time: string | null;
+    end_time: string | null;
+  };
+  type Client = {
+    id: number;
+    name: string | null;
+    role: "admin" | "client" | "demonstrator" | null;
+    verified: boolean | null;
+    user_id: string | null;
   };
   type User = Database["public"]["Tables"]["User"]["Row"];
-  type Location = Database["public"]["Tables"]["Location"]["Row"];
+  type DBLocation = Database["public"]["Tables"]["Location"]["Row"];
 }
