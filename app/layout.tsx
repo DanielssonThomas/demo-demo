@@ -20,8 +20,10 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={GeistSans.className}>
       <body className="bg-background text-foreground">
-        <NavBar />
-        <LogOutButton />
+        <div className="flex flex-row justify-between">
+          <NavBar />
+          <LogOutButton />
+        </div>
         <main>{children}</main>
         <Footer />
       </body>

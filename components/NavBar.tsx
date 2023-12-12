@@ -1,34 +1,47 @@
+"use client";
+
 import Link from "next/link";
-import LogOutButton from "./buttons/LogoutButton";
-import {createClient} from "@/utils/supabase/server";
-import {cookies} from "next/headers";
+import {useEffect, useState} from "react";
 
-const NavBar = async () => {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+const NavBar = () => {
+  const [userRole, setUserRole] = useState("");
 
-  const session = (await supabase.auth.getSession()).data.session;
+  useEffect(() => {
+    getUserInfo();
+  }, []);
 
-  if (!session) {
-    return <p>No session</p>;
-  }
+  const getUserInfo = async () => {
+    try {
+      const data = await fetch("/api/post/get-user-info", {
+        method: "POST",
+      });
+      const res = await data.json();
+      console.log(res.data);
 
-  console.log(session.user.id);
+      setUserRole(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  return (
+  return userRole ? (
     <nav>
-      <h1>This is the nav bar</h1>
       <Link href={"/dashboard"}>
         <p>Home</p>
       </Link>
-      <Link href={"/client/create-event"}>
-        <p>Create event</p>
-      </Link>
-      <Link href={"/admin"}>
-        <p>Admin page</p>
-      </Link>
-      <LogOutButton />
+      {userRole == "client" && (
+        <Link href={"/client/create-event"}>
+          <p>Create event</p>
+        </Link>
+      )}
+      {userRole == "admin" && (
+        <Link href={"/admin"}>
+          <p>Admin page</p>
+        </Link>
+      )}
     </nav>
+  ) : (
+    <></>
   );
 };
 
