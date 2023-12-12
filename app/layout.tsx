@@ -2,6 +2,7 @@ import {GeistSans} from "geist/font/sans";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import LogOutButton from "@/components/buttons/LogoutButton";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -20,6 +21,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     <html lang="en" className={GeistSans.className}>
       <body className="bg-background text-foreground">
         <NavBar />
+        <LogOutButton />
         <main>{children}</main>
         <Footer />
       </body>
