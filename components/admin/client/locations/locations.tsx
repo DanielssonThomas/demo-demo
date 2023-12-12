@@ -22,7 +22,7 @@ export const Locations = ({ id }: { id: number }) => {
 
   if (loading && locations === null) {
     return (
-      <div className="flex flex-col justiy-center items-center w-full h-[100vh]">
+      <div className="flex flex-col justify-center items-center w-[25vw] h-[100vh] border-x-[1px] border-solid border-black">
         <div
           className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] text-black dark:text-white"
           role="status"
