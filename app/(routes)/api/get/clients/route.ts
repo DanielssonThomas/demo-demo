@@ -25,7 +25,7 @@ export async function GET(request: Request) {
   const {
     data: clients,
     error,
-  }: { data: Client[] | null; error: PostgrestError | null } = await supabase
+  }: { data: DBClient[] | null; error: PostgrestError | null } = await supabase
     .from("User")
     .select("*")
     .match({ role: "client" });

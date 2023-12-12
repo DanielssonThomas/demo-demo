@@ -75,6 +75,7 @@ const Admin = ({
           travels_cost={event.travels_cost}
           verified={event.verified}
           active={event.active}
+          client_id={event.client_id ?? 0}
         />
       ) : (
         <></>

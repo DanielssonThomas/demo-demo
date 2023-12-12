@@ -5,6 +5,7 @@ declare global {
   type TableClientEvent = {
     active: boolean | null;
     client: string | null;
+    client_id: number | null;
     comment: string | null;
     date: string | null;
     demonstrator: string | null;
@@ -20,7 +21,7 @@ declare global {
     start_time: string | null;
     end_time: string | null;
   };
-  type Client = {
+  type DBClient = {
     id: number;
     name: string | null;
     role: "admin" | "client" | "demonstrator" | null;

@@ -1,4 +1,5 @@
-import { useRouter, redirect } from "next/navigation";
+import Link from "next/link";
+import { useRouter, usePathname, redirect } from "next/navigation";
 import { useState, useEffect } from "react";
 
 type EventDetailsProps = {
@@ -6,6 +7,7 @@ type EventDetailsProps = {
   location: string;
   address: string;
   client: string;
+  client_id: number;
   date: string;
   comment: string;
   product_name: string;
@@ -24,6 +26,7 @@ const EventDetails = ({
   location,
   address,
   client,
+  client_id,
   date,
   comment,
   product_name,
@@ -37,6 +40,7 @@ const EventDetails = ({
   active,
 }: EventDetailsProps) => {
   const router = useRouter();
+  const pathname = usePathname();
   const [locations, setLocations] = useState<DBLocation[] | null>(null);
   const [formAddress, setFormAddress] = useState<string | null>(address);
 
@@ -83,7 +87,7 @@ const EventDetails = ({
           <input type="hidden" name="id" value={id} />
           <div className="flex gap-2">
             <h3 className="font-bold">Clients:</h3>
-            <p>{client}</p>
+            <Link href={`${pathname}/client/${client_id}`}>{client}</Link>
           </div>
           <div>
             <label htmlFor="location" className="font-bold">

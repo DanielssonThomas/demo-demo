@@ -13,6 +13,7 @@ export interface Database {
         Row: {
           active: boolean | null
           client: string
+          client_id: number | null
           comment: string | null
           date: string | null
           demonstrator: string | null
@@ -30,6 +31,7 @@ export interface Database {
         Insert: {
           active?: boolean | null
           client: string
+          client_id?: number | null
           comment?: string | null
           date?: string | null
           demonstrator?: string | null
@@ -47,6 +49,7 @@ export interface Database {
         Update: {
           active?: boolean | null
           client?: string
+          client_id?: number | null
           comment?: string | null
           date?: string | null
           demonstrator?: string | null
@@ -68,6 +71,13 @@ export interface Database {
             isOneToOne: false
             referencedRelation: "User"
             referencedColumns: ["name"]
+          },
+          {
+            foreignKeyName: "Event_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "User"
+            referencedColumns: ["id"]
           },
           {
             foreignKeyName: "Event_location_id_fkey"
