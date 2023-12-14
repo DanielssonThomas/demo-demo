@@ -1,9 +1,7 @@
 import {createClient} from "@/utils/supabase/server";
 import {cookies} from "next/headers";
 import {redirect} from "next/navigation";
-import {PostgrestError} from "@supabase/supabase-js";
 import {NextResponse} from "next/server";
-import {data} from "autoprefixer";
 
 export async function POST(request: Request) {
   const supabase = createClient(cookies());

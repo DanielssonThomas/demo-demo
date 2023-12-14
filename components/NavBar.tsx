@@ -16,7 +16,6 @@ const NavBar = () => {
         method: "POST",
       });
       const res = await data.json();
-      console.log(res.data);
 
       setUserRole(res.data);
     } catch (error) {
