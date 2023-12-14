@@ -27,6 +27,7 @@ export async function GET(request: Request) {
     await supabase.from("Location").select("*");
 
   if (error) {
+    console.log("Error getting locations: ", error);
     return NextResponse.json({ data: locations, error: true });
   }
 

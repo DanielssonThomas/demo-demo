@@ -12,6 +12,7 @@ export async function GET(request: Request) {
     data: { user },
   } = await supabase.auth.getUser();
   if (user === null) return NextResponse.redirect(`${requestUrl.origin}/`);
+
   const { data: profile }: { data: User | null } = await supabase
     .from("User")
     .select("*")
@@ -28,7 +29,7 @@ export async function GET(request: Request) {
     await supabase.from("Event").select("*, Location(name, address)");
 
   if (error) {
-    console.log(error);
+    console.log("Error getting events: ", error);
     return NextResponse.json({ data: events, error: true });
   }
 
