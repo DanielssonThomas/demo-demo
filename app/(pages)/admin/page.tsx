@@ -1,7 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useRouter, usePathname } from "next/navigation";
-import { redirect } from "next/navigation";
 import Controller from "@/components/admin/controller";
 import EventDetails from "@/components/admin/Event-details";
 import UserDetails from "@/components/admin/User-details";
@@ -21,8 +19,9 @@ const Admin = ({
       method: "GET",
     });
     const res = await data.json();
-    if (res.unauth) redirect("/");
+
     setEvents(res.data);
+    console.log("Events admin data: ", res.data);
   };
 
   const getEvent = async () => {
@@ -35,8 +34,9 @@ const Admin = ({
       method: "GET",
     });
     const res = await data.json();
-    if (res.unauth) redirect("/");
+
     setUsers(res.data);
+    console.log("Users admin data: ", res.data);
   };
 
   const getUser = () => {

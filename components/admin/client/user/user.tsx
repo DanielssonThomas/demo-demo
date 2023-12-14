@@ -39,7 +39,7 @@ export const User = ({ id }: { id: number }) => {
   }
 
   return (
-    <form className="flex flex-col items-center justify-center w-[25vw]">
+    <form className="w-[25vw] p-2">
       <section className="flex flex-col gap-4 p-2 text-sm relative border-[1px] border-solid border-black rounded-md h-[25vh]">
         <div className="w-full flex flex-col">
           <label htmlFor="name" className="font-bold">
@@ -80,7 +80,9 @@ export const User = ({ id }: { id: number }) => {
             onClick={() => setVerified(!verified)}
           />
         </div>
-        <button className="absolute right-2 bottom-2">save changes</button>
+        <button className="absolute right-2 bottom-2 bg-[#dbdbdb] border-[1px] border-black border-solid rounded-md px-4 py-2">
+          Save changes
+        </button>
       </section>
     </form>
   );

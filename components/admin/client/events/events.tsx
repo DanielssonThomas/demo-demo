@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Event } from "./event";
+import { CreateEvent } from "../create-event";
 
 type EventsProps = { id: number };
 
@@ -7,6 +8,8 @@ export const Events = ({ id }: EventsProps) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [events, setEvents] = useState<TableClientEvent[] | null>(null);
   const [locations, setLocations] = useState<DBLocation[] | null>(null);
+  const [deleteEventActive, setDeleteEventActive] = useState<boolean>(false);
+  const [createEventActive, setCreateEventActive] = useState<boolean>(false);
 
   const getEvents = async () => {
     const data = await fetch("/api/post/get-event", {
@@ -33,7 +36,7 @@ export const Events = ({ id }: EventsProps) => {
   useEffect(() => {
     getEvents();
     getLocations();
-  }, []);
+  }, [deleteEventActive, createEventActive]);
 
   if (loading && events === null) {
     return (
@@ -51,7 +54,15 @@ export const Events = ({ id }: EventsProps) => {
   }
 
   return (
-    <div className="w-[50vw]">
+    <div className="w-[50vw] h-screen overflow-scroll">
+      {createEventActive && (
+        <CreateEvent
+          client_id={id}
+          client_name={events !== null ? events[0].client : ""}
+          locations={locations}
+          setPopUpActive={setCreateEventActive}
+        />
+      )}
       {events?.map((event) => (
         <Event
           id={event.id}
@@ -69,8 +80,17 @@ export const Events = ({ id }: EventsProps) => {
           travels_cost={event.travels_cost}
           verified={event.verified}
           locations={locations}
+          deleteEventActive={deleteEventActive}
+          setDeleteEventActive={setDeleteEventActive}
         />
       ))}
+      <section
+        className="flex flex-col justify-center items-center relative m-2 p-4 text-black border-[1px] border-solid border-black rounded-md h-[15vh] cursor-pointer"
+        onClick={() => setCreateEventActive(!createEventActive)}
+      >
+        <div className="absolute w-[3rem] h-[1px] bg-black" />
+        <div className="absolute w-[1px] h-[3rem] bg-black" />
+      </section>
     </div>
   );
 };

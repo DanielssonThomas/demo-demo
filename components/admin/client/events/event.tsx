@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { DeleteEvent } from "../delete-event";
 
 type EventProps = {
   id: number;
@@ -16,6 +17,8 @@ type EventProps = {
   travels_cost: number | null;
   units_used: number | null;
   locations: DBLocation[] | null;
+  deleteEventActive: boolean;
+  setDeleteEventActive: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const Event = ({
@@ -34,6 +37,8 @@ export const Event = ({
   travels_cost,
   units_used,
   locations,
+  deleteEventActive,
+  setDeleteEventActive,
 }: EventProps) => {
   const [formAddress, setFormAddress] = useState<string | null>(
     Location.address
@@ -50,6 +55,18 @@ export const Event = ({
       action={(e) => updateEvent(e)}
       className="m-2 p-4 text-sm relative border-[1px] border-solid border-black rounded-md"
     >
+      {deleteEventActive && (
+        <DeleteEvent id={id} setPopUpActive={setDeleteEventActive} />
+      )}
+      <button
+        onClick={(e: any) => {
+          e.preventDefault();
+          setDeleteEventActive(!deleteEventActive);
+        }}
+        className="absolute top-1 right-2 text-xl text-red-500"
+      >
+        X
+      </button>
       <input type="hidden" name="id" value={id} />
       <div>
         <label htmlFor="location" className="font-bold">
@@ -69,7 +86,7 @@ export const Event = ({
       </div>
       <div className="flex gap-2">
         <h3 className="font-bold">Address:</h3>
-        <p>{formAddress}</p>
+        <p>{Location.address}</p>
       </div>
       <section className="flex gap-2 ">
         <div className="flex gap-2">
