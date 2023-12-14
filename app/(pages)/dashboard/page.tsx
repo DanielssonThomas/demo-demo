@@ -1,25 +1,24 @@
-import { createClient } from "@/utils/supabase/server";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import {createClient} from "@/utils/supabase/server";
+import {cookies} from "next/headers";
+import {redirect} from "next/navigation";
 import UserSetup from "@/components/pop-ups/User-Setup";
+import EventList from "@/components/cards/EventList";
 
 const Dashboard = async () => {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const {
-    data: { user },
+    data: {user},
   } = await supabase.auth.getUser();
 
   if (!user) redirect("/");
 
-  const { data } = await supabase
-    .from("User")
-    .select("id")
-    .match({ user_id: user.id });
+  const {data} = await supabase.from("User").select("id").match({user_id: user.id});
 
   return data?.length !== 0 ? (
     <>
       <h1>This is the home page</h1>
+      <EventList />
     </>
   ) : (
     <div className="w-full h-full bg-white">

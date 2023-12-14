@@ -20,7 +20,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={GeistSans.className}>
       <body className="bg-background text-foreground">
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row justify-between px-5 py-5">
           <NavBar />
           <LogOutButton />
         </div>
