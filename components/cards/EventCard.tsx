@@ -1,4 +1,4 @@
-const EventCard = () => {
+const EventCard = ({classname}: {classname?: string}) => {
   return <div>event card</div>;
 };
 
