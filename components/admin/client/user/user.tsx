@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 export const User = ({ id }: { id: number }) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [name, setName] = useState<string | null>(null);
-  const [verified, setVerified] = useState<boolean | null>(null);
+  const [verified, setVerified] = useState<boolean>(false);
   const [role, setRole] = useState<string | null>(null);
 
   const getUser = async () => {
@@ -23,6 +23,16 @@ export const User = ({ id }: { id: number }) => {
     getUser();
   }, []);
 
+  const updateUser = async (e: FormData) => {
+    const data = await fetch("/api/post/update-user", {
+      method: "POST",
+      body: e,
+    });
+    const res = await data.json();
+    console.log(res);
+    getUser();
+  };
+
   if (loading) {
     return (
       <div className="flex flex-col justify-center items-center w-[25vw] h-screen">
@@ -39,7 +49,8 @@ export const User = ({ id }: { id: number }) => {
   }
 
   return (
-    <form className="w-[25vw] p-2">
+    <form action={updateUser} className="w-[25vw] p-2">
+      <input type="hidden" name="id" value={id} />
       <section className="flex flex-col gap-4 p-2 text-sm relative border-[1px] border-solid border-black rounded-md h-[25vh]">
         <div className="w-full flex flex-col">
           <label htmlFor="name" className="font-bold">
