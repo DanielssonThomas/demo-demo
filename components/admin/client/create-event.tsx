@@ -51,11 +51,7 @@ export const CreateEvent = ({
           <h2 className="text-2xl">Create event for client</h2>
           <form action={createEvent} className="flex flex-col w-full gap-4">
             <input type="hidden" name="client_id" value={client_id} />
-            <input
-              type="hidden"
-              name="client_name"
-              value={client_name === null ? "" : client_name}
-            />
+            <input type="hidden" name="client_name" value={client_name ?? ""} />
             <div>
               <label htmlFor="location" className="font-bold">
                 Locations:

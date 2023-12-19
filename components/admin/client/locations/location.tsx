@@ -55,11 +55,6 @@ export const Location = ({
       >
         X
       </button>
-      {errorMessage === "" ? (
-        <></>
-      ) : (
-        <p className="text-red-500">Error: {errorMessage}</p>
-      )}
       <div className="flex flex-col">
         <input type="hidden" name="id" value={id} />
         <label htmlFor="name" className="font-bold">
