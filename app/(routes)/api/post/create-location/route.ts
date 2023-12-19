@@ -9,11 +9,17 @@ export async function POST(request: Request) {
   const client_id = reqFormData.get("client_id");
   const name = reqFormData.get("name");
   const address = reqFormData.get("address");
+  const client_name = reqFormData.get("client_name");
 
   const { error }: { data: User | null; error: PostgrestError | null } =
     await supabase
       .from("Location")
-      .insert({ name: name, address: address, client_id: client_id });
+      .insert({
+        name: name,
+        address: address,
+        client_id: client_id,
+        client_name: client_name,
+      });
 
   if (error) {
     console.log(error);

@@ -22,7 +22,6 @@ export async function POST(request: Request) {
   const units_used = parseInt(reqFormData.get("units_used") as string);
   const client_id = reqFormData.get("client_id");
 
-  console.log("Data: ", reqFormData);
   const { error }: { data: User | null; error: PostgrestError | null } =
     await supabase.from("Event").insert({
       location_id: location_id,

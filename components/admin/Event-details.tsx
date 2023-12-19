@@ -87,7 +87,12 @@ const EventDetails = ({
           <input type="hidden" name="id" value={id} />
           <div className="flex gap-2">
             <h3 className="font-bold">Clients:</h3>
-            <Link href={`${pathname}/client/${client_id}`}>{client}</Link>
+            <Link
+              href={`${pathname}/client/${client_id}`}
+              className="underline"
+            >
+              {client}
+            </Link>
           </div>
           <div>
             <label htmlFor="location" className="font-bold">

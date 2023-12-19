@@ -30,13 +30,22 @@ export const CreateLocation = ({
         className="fixed w-[100vw] h-[100vh] top-0 left-0 bg-white opacity-50 z-20"
         onClick={() => setPopUpActive(false)}
       />
-      <section className="fixed top-[33.5vh] right-[37.5vw] left-[37.5vw] bottom-0 w-1/4 h-1/3 border-[1px] border-solid border-black rounded-md bg-[#EDEDED] text-black p-4 z-40">
+      <section className="fixed top-[25vh] right-[37.5vw] left-[37.5vw] bottom-0 w-1/4 h-1/2 border-[1px] border-solid border-black rounded-md bg-[#EDEDED] text-black p-4 z-40">
         <div className="flex flex-col justify-center items-center gap-4">
           <h2 className="text-2xl">Create location for client</h2>
           <form
             action={createLocation}
             className="flex flex-col w-full items-center gap-4"
           >
+            <div>
+              <h3>Client name:</h3>
+              <input
+                type="text"
+                name="client_name"
+                className="px-2 py-1 border-[1px] border-solid border-black rounded-sm bg-[#EDEDED]"
+                required
+              />
+            </div>
             <div>
               <input type="hidden" name="client_id" value={client_id} />
               <h3>Name:</h3>
