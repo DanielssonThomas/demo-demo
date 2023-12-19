@@ -16,10 +16,10 @@ const Dashboard = async () => {
   const {data} = await supabase.from("User").select("id").match({user_id: user.id});
 
   return data?.length !== 0 ? (
-    <>
+    <div className="w-full h-screen bg-[#EDEDED]">
       <h1>This is the home page</h1>
       <EventList />
-    </>
+    </div>
   ) : (
     <div className="w-full h-full bg-white">
       <UserSetup />
