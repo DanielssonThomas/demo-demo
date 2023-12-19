@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DeleteEvent } from "../delete-event";
 
 type EventProps = {
@@ -19,6 +19,7 @@ type EventProps = {
   locations: DBLocation[] | null;
   deleteEventActive: boolean;
   setDeleteEventActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const Event = ({
@@ -39,7 +40,9 @@ export const Event = ({
   locations,
   deleteEventActive,
   setDeleteEventActive,
+  setRefresh,
 }: EventProps) => {
+  const [loaded, setLoaded] = useState<boolean>(false);
   const [formAddress, setFormAddress] = useState<string | null>(
     Location.address
   );
@@ -48,7 +51,42 @@ export const Event = ({
   const [formVerified, setFormVerified] = useState<boolean | null>(verified);
   const [formActive, setFormActive] = useState<boolean | null>(active);
 
-  const updateEvent = async (e: FormData) => {};
+  const [selectedFormLocationId, setSelectedFormLocationId] = useState<
+    number | null
+  >(null);
+
+  const [formLocations, setFormLocations] = useState<DBLocation[] | null>(
+    locations
+  );
+
+  useEffect(() => {
+    const newFormLocations = formLocations;
+    if (!loaded) {
+      const targetIndex = newFormLocations?.findIndex(
+        (location) => location.address === Location.address
+      );
+
+      const movedObject = newFormLocations?.splice(targetIndex ?? 0, 1)[0];
+
+      if (movedObject !== undefined) newFormLocations?.unshift(movedObject);
+
+      setFormLocations(newFormLocations);
+      setLoaded(true);
+    }
+    const newAddress = locations?.find(
+      (location) => location.id === selectedFormLocationId
+    );
+    if (newAddress !== undefined) setFormAddress(newAddress.address);
+  }, [selectedFormLocationId]);
+
+  const updateEvent = async (e: FormData) => {
+    const data = await fetch("/api/post/update-event", {
+      method: "POST",
+      body: e,
+    });
+    const res = await data.json();
+    setRefresh(true);
+  };
 
   return (
     <form
@@ -76,17 +114,17 @@ export const Event = ({
           name="location_id"
           className="bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm"
           onChange={(e) => {
-            setFormAddress(e.target.value);
+            setSelectedFormLocationId(parseInt(e.target.value));
           }}
         >
-          {locations?.map((loc) => (
+          {formLocations?.map((loc) => (
             <option value={loc.id ?? ""}>{loc.name}</option>
           ))}
         </select>
       </div>
       <div className="flex gap-2">
         <h3 className="font-bold">Address:</h3>
-        <p>{Location.address}</p>
+        <p>{formAddress}</p>
       </div>
       <section className="flex gap-2 ">
         <div className="flex gap-2">
