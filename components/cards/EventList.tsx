@@ -39,39 +39,44 @@ const EventList = () => {
   };
 
   return (
-    <table>
+    <table className="w-full text-black">
       <thead>
         <tr>
           <th>Client</th>
           <th>Location</th>
           <th>Address</th>
-          <th>Product</th>
           <th>Date</th>
           <th>Time</th>
+          <th>Demonstrator</th>
         </tr>
       </thead>
       <tbody>
-        {userRole == "admin" &&
-          allEventsInfo?.map((event) => (
-            <ClientEventCard
-              client={event.client}
-              location={event.Location.name}
-              address={event.Location.address}
-              product={event.product_name}
-              date={event.date}
-              time={event.start_time}
-              key={event.id}
-            />
-          ))}
-        {userRole == "admin" &&
+        {userRole == "client" ||
+          (userRole == "admin" &&
+            allEventsInfo?.map((event) => (
+              <ClientEventCard
+                className="h-[3rem] border-[1px] border-solid rounded-sm border-black transition-all duration-300 hover:scale-[1.02] hover:p-4 cursor-pointer"
+                client={event.client}
+                location={event.Location.name}
+                address={event.Location.address}
+                supplier={event.supplier}
+                date={event.date}
+                startTime={event.start_time}
+                endTime={event.end_time}
+                demonstrator={event.demonstrator}
+                key={event.id}
+              />
+            )))}
+        {userRole == "demonstrator" &&
           allEventsInfo?.map((event) => (
             <DemonstratorEventCard
+              className="h-[3rem] border-[1px] border-solid rounded-sm border-black transition-all duration-300 hover:scale-[1.02] hover:p-4 cursor-pointer"
               client={event.client}
               location={event.Location.name}
               address={event.Location.address}
-              product={event.product_name}
               date={event.date}
-              time={event.start_time}
+              startTime={event.start_time}
+              endTime={event.end_time}
               active={event.active}
               key={event.id}
             />

@@ -1,35 +1,28 @@
 const DemonstratorEventCard = ({
-  classname,
+  className,
   client,
   location,
   address,
-  product,
   date,
-  time,
-  active,
+  startTime,
+  endTime,
 }: {
-  classname?: string | null;
+  className?: string | null;
   client: string | null;
   location: string | null;
   address: string | null;
-  product: string | null;
   date: string | null;
-  time: string | null;
+  startTime: string | null;
+  endTime: string | null;
   active: boolean | null;
 }) => {
   return (
-    <tr>
+    <tr className={`${className}`}>
       <th>{client}</th>
       <th>{location}</th>
       <th>{address}</th>
-      <th>{product}</th>
       <th>{date}</th>
-      <th>{time}</th>
-      {active == null && (
-        <td>
-          <button>Signup for event</button>
-        </td>
-      )}
+      <th>{`${startTime} - ${endTime}`}</th>
     </tr>
   );
 };

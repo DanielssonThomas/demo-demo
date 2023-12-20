@@ -1,31 +1,31 @@
 const ClientEventCard = ({
-  classname,
+  className,
   client,
   location,
   address,
-  product,
   date,
-  time,
+  startTime,
+  endTime,
+  demonstrator,
 }: {
-  classname?: string | null;
+  className?: string | null;
   client: string | null;
   location: string | null;
   address: string | null;
-  product: string | null;
+  supplier: string | null;
   date: string | null;
-  time: string | null;
+  startTime: string | null;
+  endTime: string | null;
+  demonstrator: string | null;
 }) => {
   return (
-    <tr>
+    <tr className={`${className}`}>
       <th>{client}</th>
       <th>{location}</th>
       <th>{address}</th>
-      <th>{product}</th>
       <th>{date}</th>
-      <th>{time}</th>
-      <td>
-        <button>Edit Event</button>
-      </td>
+      <th>{`${startTime} - ${endTime}`}</th>
+      <th>{demonstrator}</th>
     </tr>
   );
 };
