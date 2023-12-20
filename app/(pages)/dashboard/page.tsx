@@ -17,7 +17,6 @@ const Dashboard = async () => {
 
   return data?.length !== 0 ? (
     <div className="w-full h-screen bg-[#EDEDED]">
-      <h1>This is the home page</h1>
       <EventList />
     </div>
   ) : (
