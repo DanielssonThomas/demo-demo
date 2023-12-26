@@ -1,22 +1,23 @@
-import {cookies} from "next/headers";
-import {redirect} from "next/navigation";
-import {createClient} from "@/utils/supabase/server";
+"use client";
+
+import {useRouter} from "next/navigation";
 
 const LogOutButton = () => {
-  const signOut = async () => {
-    "use server";
+  const router = useRouter();
+  const logout = async () => {
+    try {
+      await fetch("/api/post/logout-user", {
+        method: "POST",
+      });
+    } catch (error) {
+      console.log(error);
+      return;
+    }
 
-    const cookieStore = cookies();
-    const supabase = createClient(cookieStore);
-    await supabase.auth.signOut();
-    return redirect("/login");
+    router.push("/login");
   };
 
-  return (
-    <form action={signOut}>
-      <button>Logout</button>
-    </form>
-  );
+  return <button onClick={logout}>Logout</button>;
 };
 
 export default LogOutButton;
