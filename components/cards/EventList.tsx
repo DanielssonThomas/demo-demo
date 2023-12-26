@@ -2,7 +2,7 @@
 
 import ClientEventCard from "./ClientEventCard";
 import DemonstratorEventCard from "./DemonstratorEventCard";
-import {useState, useEffect, use} from "react";
+import {useState, useEffect} from "react";
 
 const EventList = () => {
   const [allEventsInfo, setAllEventsInfo] = useState<TableClientEvent[] | null>(null);
@@ -20,8 +20,6 @@ const EventList = () => {
     const res = await data.json();
     const info = await res.data;
 
-    console.log(res.data);
-
     setAllEventsInfo(info);
   };
 
@@ -31,6 +29,8 @@ const EventList = () => {
         method: "POST",
       });
       const res = await data.json();
+
+      console.log(res);
 
       setUserRole(res.data);
     } catch (error) {
