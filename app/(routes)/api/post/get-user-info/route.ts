@@ -10,7 +10,10 @@ export async function POST(request: Request) {
   } = await supabase.auth.getSession();
 
   if (!session) {
-    redirect("/login");
+    return NextResponse.json(
+      {message: "something went wrong", data: null, error: true},
+      {status: 301}
+    );
   }
 
   const {data: user}: {data: User | null} = await supabase
@@ -20,10 +23,10 @@ export async function POST(request: Request) {
     .single();
 
   if (user == null) {
-    return new Response(JSON.stringify({message: "Something went wrong"}));
-  } else if (user.role == null || user.role == "") {
-    return new Response(JSON.stringify({message: "Something went wrong"}));
+    return NextResponse.json({data: null, error: true}, {status: 301});
+  } else if (user.role == null) {
+    return NextResponse.json({data: null, error: true}, {status: 301});
+  } else {
+    return NextResponse.json({data: user.role}, {status: 200});
   }
-
-  return NextResponse.json({data: user.role});
 }

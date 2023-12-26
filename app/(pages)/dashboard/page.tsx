@@ -11,7 +11,7 @@ const Dashboard = async () => {
     data: {user},
   } = await supabase.auth.getUser();
 
-  if (!user) redirect("/");
+  if (!user) redirect("/login");
 
   const {data} = await supabase.from("User").select("id").match({user_id: user.id});
 
