@@ -9,5 +9,7 @@ export async function POST(request: Request) {
   const {data, error}: {data: TableClientEvent[] | null; error: PostgrestError | null} =
     await supabase.from("Event").select(`*, Location (*)`);
 
+  // console.log(data);
+
   return NextResponse.json({data: data, error: error});
 }
