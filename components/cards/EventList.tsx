@@ -1,8 +1,9 @@
 "use client";
 
+import {useState, useEffect} from "react";
 import EventListItem from "./EventListItem";
 import EventInfoCard from "./EventInfoCard";
-import {useState, useEffect} from "react";
+import CloseButton from "../buttons/CloseButton";
 
 const EventList = () => {
   const [allEventsInfo, setAllEventsInfo] = useState<TableClientEvent[] | null>(null);
@@ -96,6 +97,12 @@ const EventList = () => {
             unitsUsed={eventInfo.units_used}
           />
         )}
+        <CloseButton
+          onClick={() => {
+            setEventInfo(null);
+            setEventInfoStyling("hidden");
+          }}
+        />
       </div>
     </div>
   );
