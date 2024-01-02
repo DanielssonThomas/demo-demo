@@ -26,7 +26,7 @@ export const EventRow = ({
     <tr
       className="h-[3rem] border-[1px] border-solid rounded-sm border-black transition-all duration-300 hover:scale-[1.02] hover:p-4 cursor-pointer"
       onClick={() =>
-        router.push(pathname + "?" + "type=event" + "&" + `id=${id}`)
+        router.push(pathname + `/${id}`)
       }
     >
       <td className="text-center">{client}</td>

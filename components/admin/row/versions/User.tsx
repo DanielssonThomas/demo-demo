@@ -14,9 +14,7 @@ export const UserRow = ({ id, name, role, verified }: UserRowProps) => {
     <tr
       className="h-[3rem] border-[1px] border-solid rounded-sm border-black transition-all duration-300 hover:scale-[1.02] hover:p-4 
   cursor-pointer"
-      onClick={() =>
-        router.push(pathname + "?" + "type=user" + "&" + `id=${id}`)
-      }
+      onClick={() => router.push(pathname + `/${id}`)}
     >
       <td className="text-center">{name}</td>
       <td className="text-center">{role}</td>
