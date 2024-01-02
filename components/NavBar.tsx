@@ -16,7 +16,7 @@ const NavBar = () => {
 
     const res = await data.json();
 
-    setUserRole(res.data);
+    setUserRole(res.data.role);
 
     return;
   };

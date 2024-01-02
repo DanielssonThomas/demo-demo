@@ -18,15 +18,13 @@ export async function POST(request: Request) {
 
   const {data: user}: {data: User | null} = await supabase
     .from("User")
-    .select("*")
+    .select("id, name, role")
     .eq("user_id", session.user.id)
     .single();
 
   if (user == null) {
     return NextResponse.json({data: null, error: true}, {status: 301});
-  } else if (user.role == null) {
-    return NextResponse.json({data: null, error: true}, {status: 301});
   } else {
-    return NextResponse.json({data: user.role}, {status: 200});
+    return NextResponse.json({data: user}, {status: 200});
   }
 }
