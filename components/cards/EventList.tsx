@@ -4,12 +4,18 @@ import {useState, useEffect} from "react";
 import EventListItem from "./EventListItem";
 import EventInfoCard from "./EventInfoCard";
 import CloseButton from "../buttons/CloseButton";
+import SignupButton from "../buttons/SignUpButton";
 
 const EventList = () => {
   const [allEventsInfo, setAllEventsInfo] = useState<TableClientEvent[] | null>(null);
   const [eventInfo, setEventInfo] = useState<TableClientEvent | null>(null);
   const [userRole, setUserRole] = useState("");
   const [eventInfoStyling, setEventInfoStyling] = useState("hidden");
+  const [userInfo, setUserInfo] = useState({
+    id: "",
+    name: "",
+    role: "",
+  });
 
   useEffect(() => {
     getUserInfo();
@@ -33,7 +39,11 @@ const EventList = () => {
       });
       const res = await data.json();
 
-      setUserRole(res.data);
+      setUserInfo({
+        id: res.data.id,
+        name: res.data.name,
+        role: res.data.role,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -48,9 +58,38 @@ const EventList = () => {
     }
   };
 
+  const SignUpDemonstrator = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (eventInfo?.demonstrator != null) {
+      console.log("already has demonstrator");
+      return;
+    } else {
+      console.log("has no demonstrator");
+    }
+
+    const bodyData = {eventId: eventInfo?.id, userId: userInfo.id, userName: userInfo.name};
+
+    try {
+      const data = await fetch("/api/post/update-demonstrator", {
+        method: "POST",
+        body: JSON.stringify(bodyData),
+      });
+      const res = await data.json();
+
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+
+    getAllEvents();
+    setEventInfoStyling("hidden");
+    setEventInfo(null);
+
+    return;
+  };
+
   return (
     <div>
-      <table className="w-full text-black fixed z-0">
+      <table className="w-full text-black absolute z-0">
         <thead>
           <tr>
             <th>Client</th>
@@ -103,6 +142,7 @@ const EventList = () => {
             setEventInfoStyling("hidden");
           }}
         />
+        {eventInfo?.demonstrator == null && <SignupButton onClick={SignUpDemonstrator} />}
       </div>
     </div>
   );
