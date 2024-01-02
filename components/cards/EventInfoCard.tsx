@@ -27,17 +27,17 @@ const EventInfoCard = ({
 }) => {
   return (
     <div className={`${className}`}>
-      <p>{client}</p>
-      <p>{location}</p>
-      <p>{address}</p>
-      <p>{date}</p>
-      <p>{startTime}</p>
-      <p>{endTime}</p>
-      <p>{demonstrator}</p>
-      <p>{product}</p>
-      <p>{suplier}</p>
-      <p>{productStock}</p>
-      <p>{unitsUsed}</p>
+      <p>Client: {client}</p>
+      <p>Location: {location}</p>
+      <p>Address: {address}</p>
+      <p>Date: {date}</p>
+      <p>Starts: {startTime}</p>
+      <p>Ends: {endTime}</p>
+      <p>Demonstrator: {demonstrator}</p>
+      <p>Product: {product}</p>
+      <p>Supplier: {suplier}</p>
+      <p>Stock: {productStock}</p>
+      <p>Units used: {unitsUsed}</p>
     </div>
   );
 };
