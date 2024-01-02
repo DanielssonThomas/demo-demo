@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 
 type UserDetailsProps = {
-  id: number;
+  id: number | null | undefined;
   name: string;
   role: string;
   verified: boolean | null | undefined;
