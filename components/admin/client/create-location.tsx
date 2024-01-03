@@ -11,7 +11,17 @@ export const CreateLocation = ({
   setPopUpActive,
 }: CreateLocation) => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [clientName, setClientName] = useState<string>("");
   const router = useRouter();
+
+  const getClientName = async () => {
+    const data = await fetch("/api/post/get-user", {
+      method: "POST",
+      body: JSON.stringify({ id: client_id }),
+    });
+    const res = await data.json();
+    setClientName(res.data.name);
+  };
 
   const createLocation = async (e: FormData) => {
     const data = await fetch("/api/post/create-location", {
@@ -24,28 +34,24 @@ export const CreateLocation = ({
     setErrorMessage(res.message);
   };
 
+  useEffect(() => {
+    getClientName();
+  }, []);
+
   return (
     <div className="absolute">
       <div
         className="fixed w-[100vw] h-[100vh] top-0 left-0 bg-white opacity-50 z-20"
         onClick={() => setPopUpActive(false)}
       />
-      <section className="fixed top-[25vh] right-[37.5vw] left-[37.5vw] bottom-0 w-1/4 h-1/2 border-[1px] border-solid border-black rounded-md bg-[#EDEDED] text-black p-4 z-40">
+      <section className="fixed top-[25vh] right-[37.5vw] left-[37.5vw] bottom-0 w-1/4 h-2/5 border-[1px] border-solid border-black rounded-md bg-[#EDEDED] text-black p-4 z-40">
         <div className="flex flex-col justify-center items-center gap-4">
           <h2 className="text-2xl">Create location for client</h2>
           <form
             action={createLocation}
             className="flex flex-col w-full items-center gap-4"
           >
-            <div>
-              <h3>Client name:</h3>
-              <input
-                type="text"
-                name="client_name"
-                className="px-2 py-1 border-[1px] border-solid border-black rounded-sm bg-[#EDEDED]"
-                required
-              />
-            </div>
+            <input type="hidden" name="client_name" value={clientName} />
             <div>
               <input type="hidden" name="client_id" value={client_id} />
               <h3>Name:</h3>
