@@ -3,7 +3,7 @@
 import {useRouter} from "next/navigation";
 import PrimaryButton from "./PrimaryButton";
 
-const LogOutButton = () => {
+const LogOutButton = ({className}: {className?: string}) => {
   const router = useRouter();
   const logout = async () => {
     try {
@@ -19,7 +19,7 @@ const LogOutButton = () => {
   };
 
   // return <button onClick={logout}>Logout</button>;
-  return <PrimaryButton className="" buttonText="Logout" onClick={logout} />;
+  return <PrimaryButton className={className} buttonText="Logout" onClick={logout} />;
 };
 
 export default LogOutButton;

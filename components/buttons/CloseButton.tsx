@@ -8,7 +8,7 @@ const CloseButton = ({
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }) => {
   // return <button onClick={onClick}>Close</button>;
-  return <PrimaryButton className="" buttonText="Close" onClick={onClick} />;
+  return <PrimaryButton className={className} buttonText="Close" onClick={onClick} />;
 };
 
 export default CloseButton;
