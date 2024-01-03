@@ -9,7 +9,6 @@ import SignupButton from "../buttons/SignUpButton";
 const EventList = () => {
   const [allEventsInfo, setAllEventsInfo] = useState<TableClientEvent[] | null>(null);
   const [eventInfo, setEventInfo] = useState<TableClientEvent | null>(null);
-  const [userRole, setUserRole] = useState("");
   const [eventInfoStyling, setEventInfoStyling] = useState("hidden");
   const [userInfo, setUserInfo] = useState({
     id: "",
@@ -119,11 +118,13 @@ const EventList = () => {
           ))}
         </tbody>
       </table>
-      <div className="absolute z-10">
-        <div className={`bg-red-500 ${eventInfoStyling}`}>
+      <div
+        className={`bg-red-500 absolute z-10 border-[1px] border-solid rounded-sm border-black transition-all duration-300 ${eventInfoStyling}`}
+      >
+        <div>
           {eventInfo?.id != null && (
             <EventInfoCard
-              className="border-[1px] border-solid rounded-sm border-black transition-all duration-300"
+              className=""
               client={eventInfo.client}
               location={eventInfo.Location.name}
               address={eventInfo.Location.address}
