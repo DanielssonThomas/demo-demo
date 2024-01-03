@@ -4,12 +4,18 @@ import {useState, useEffect} from "react";
 import EventListItem from "./EventListItem";
 import EventInfoCard from "./EventInfoCard";
 import CloseButton from "../buttons/CloseButton";
+import SignupButton from "../buttons/SignUpButton";
 
 const EventList = () => {
   const [allEventsInfo, setAllEventsInfo] = useState<TableClientEvent[] | null>(null);
   const [eventInfo, setEventInfo] = useState<TableClientEvent | null>(null);
   const [userRole, setUserRole] = useState("");
   const [eventInfoStyling, setEventInfoStyling] = useState("hidden");
+  const [userInfo, setUserInfo] = useState({
+    id: "",
+    name: "",
+    role: "",
+  });
 
   useEffect(() => {
     getUserInfo();
@@ -33,7 +39,11 @@ const EventList = () => {
       });
       const res = await data.json();
 
-      setUserRole(res.data);
+      setUserInfo({
+        id: res.data.id,
+        name: res.data.name,
+        role: res.data.role,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -48,9 +58,38 @@ const EventList = () => {
     }
   };
 
+  const SignUpDemonstrator = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (eventInfo?.demonstrator != null) {
+      console.log("already has demonstrator");
+      return;
+    } else {
+      console.log("has no demonstrator");
+    }
+
+    const bodyData = {eventId: eventInfo?.id, userId: userInfo.id, userName: userInfo.name};
+
+    try {
+      const data = await fetch("/api/post/update-demonstrator", {
+        method: "POST",
+        body: JSON.stringify(bodyData),
+      });
+      const res = await data.json();
+
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+
+    getAllEvents();
+    setEventInfoStyling("hidden");
+    setEventInfo(null);
+
+    return;
+  };
+
   return (
     <div>
-      <table className="w-full text-black fixed z-0">
+      <table className="w-full text-black absolute z-0">
         <thead>
           <tr>
             <th>Client</th>
@@ -80,29 +119,38 @@ const EventList = () => {
           ))}
         </tbody>
       </table>
-      <div className={`absolute z-10 bg-red-500 ${eventInfoStyling}`}>
-        {eventInfo?.id != null && (
-          <EventInfoCard
-            className="border-[1px] border-solid rounded-sm border-black transition-all duration-300"
-            client={eventInfo.client}
-            location={eventInfo.Location.name}
-            address={eventInfo.Location.address}
-            suplier={eventInfo.supplier}
-            date={eventInfo.date}
-            startTime={eventInfo.start_time}
-            endTime={eventInfo.end_time}
-            demonstrator={eventInfo.demonstrator}
-            product={eventInfo.product_name}
-            productStock={eventInfo.product_stock}
-            unitsUsed={eventInfo.units_used}
+      <div className="absolute z-10">
+        <div className={`bg-red-500 ${eventInfoStyling}`}>
+          {eventInfo?.id != null && (
+            <EventInfoCard
+              className="border-[1px] border-solid rounded-sm border-black transition-all duration-300"
+              client={eventInfo.client}
+              location={eventInfo.Location.name}
+              address={eventInfo.Location.address}
+              suplier={eventInfo.supplier}
+              date={eventInfo.date}
+              startTime={eventInfo.start_time}
+              endTime={eventInfo.end_time}
+              demonstrator={eventInfo.demonstrator}
+              product={eventInfo.product_name}
+              productStock={eventInfo.product_stock}
+              unitsUsed={eventInfo.units_used}
+            />
+          )}
+          <CloseButton
+            onClick={() => {
+              setEventInfo(null);
+              setEventInfoStyling("hidden");
+            }}
           />
-        )}
-        <CloseButton
-          onClick={() => {
-            setEventInfo(null);
-            setEventInfoStyling("hidden");
-          }}
-        />
+          {/* the real one, other is used for testing 
+        {eventInfo?.demonstrator == null && userInfo.role == "demonstrator" && (
+          <SignupButton onClick={SignUpDemonstrator} />
+        )} */}
+          {eventInfo?.demonstrator == null && userInfo.role == "admin" && (
+            <SignupButton onClick={SignUpDemonstrator} />
+          )}
+        </div>
       </div>
     </div>
   );

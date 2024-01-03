@@ -1,10 +1,12 @@
 import {createClient} from "@/utils/supabase/server";
 import {cookies} from "next/headers";
-import {redirect} from "next/navigation";
 import {NextResponse} from "next/server";
+import {PostgrestError} from "@supabase/supabase-js";
 
 export async function POST(request: Request) {
   const supabase = createClient(cookies());
+  const reqForm = await request.json();
+  const returnMessage = "";
   const {
     data: {session},
   } = await supabase.auth.getSession();
@@ -16,15 +18,11 @@ export async function POST(request: Request) {
     );
   }
 
-  const {data: user}: {data: User | null} = await supabase
-    .from("User")
-    .select("id, name, role")
-    .eq("user_id", session.user.id)
-    .single();
+  const eventId = reqForm.eventId;
+  const userName = reqForm.userName;
 
-  if (user == null) {
-    return NextResponse.json({data: null, error: true}, {status: 301});
-  } else {
-    return NextResponse.json({data: user}, {status: 200});
-  }
+  const {error} = await supabase.from("Event").update({demonstrator: userName}).eq("id", eventId);
+
+  return NextResponse.json({error: error, message: returnMessage});
+  // return NextResponse.json({message: returnMessage});
 }
