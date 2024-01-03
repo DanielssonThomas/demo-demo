@@ -5,6 +5,7 @@ type EventTableProps = {
   show: "events";
   Events: TableClientEvent[] | null;
   showVerified: boolean | null;
+  sortBy: "latest" | "oldest";
 };
 
 type UserTableProps = {
@@ -21,7 +22,7 @@ export const Table = (TableProps: TableProps) => {
       <EventsTable
         events={TableProps.Events}
         showVerified={TableProps.showVerified}
-        sortBy="latest"
+        sortBy={TableProps.sortBy}
       />
     );
   }

@@ -16,7 +16,6 @@ type EventsControllerProps = {
 type ControllerProps = UsersControllerProps | EventsControllerProps;
 
 export const Controller = ({ type, data }: ControllerProps) => {
-
   const [showVerified, setShowVerified] = useState<boolean | null>(null);
 
   const [sortDate, setSortDate] = useState<"latest" | "oldest">("latest");
@@ -29,11 +28,15 @@ export const Controller = ({ type, data }: ControllerProps) => {
         setSortDate={setSortDate}
       />
       {type === "events" ? (
-        <Table show="events" Events={data} showVerified={showVerified} />
+        <Table
+          show="events"
+          Events={data}
+          showVerified={showVerified}
+          sortBy={sortDate}
+        />
       ) : (
         <Table show="users" Users={data} showVerified={showVerified} />
       )}
-       
     </div>
   );
 };
