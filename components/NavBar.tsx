@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import {useEffect, useState} from "react";
-import LogOutButton from "./buttons/LogoutButton";
 import {usePathname} from "next/navigation";
+import LogOutButton from "./buttons/LogoutButton";
+import PrimaryLink from "./links/PrimaryLink";
 
 const NavBar = () => {
   const [userRole, setUserRole] = useState();
@@ -20,32 +21,21 @@ const NavBar = () => {
 
     return;
   };
-
+  // demonstrator/events
   useEffect(() => {
     getUserInfo();
   }, [pathname]);
 
   return userRole ? (
-    <nav>
-      <Link href={"/dashboard"}>
-        <p>Home</p>
-      </Link>
+    <nav className="p-6 flex gap-6 align-center">
+      <PrimaryLink href={"/dashboard"} linkText="Home" />
       {userRole == "client" && (
-        <Link href={"/client/create-event"}>
-          <p>Create event</p>
-        </Link>
+        <PrimaryLink href={"/client/create-event"} linkText="Create event" />
       )}
-      {userRole == "demonstrator" && (
-        <Link href={"/"}>
-          <p>My events</p>
-        </Link>
-      )}
-      {userRole == "admin" && (
-        <Link href={"/admin"}>
-          <p>Admin page</p>
-        </Link>
-      )}
-      <LogOutButton />
+      {userRole == "demonstrator" ||
+        (userRole == "admin" && <PrimaryLink href={"/demonstrator/events"} linkText="My events" />)}
+      {userRole == "admin" && <PrimaryLink href={"/admin"} linkText="Admin page" />}
+      <LogOutButton className={"ml-auto"} />
     </nav>
   ) : (
     <></>
