@@ -70,7 +70,7 @@ const EventDetails = ({
       method: "POST",
       body: e,
     });
-    redirect("/admin");
+    redirect("/admin/events");
   };
 
   return (
@@ -87,10 +87,7 @@ const EventDetails = ({
           <input type="hidden" name="id" value={id} />
           <div className="flex gap-2">
             <h3 className="font-bold">Clients:</h3>
-            <Link
-              href={`${pathname}/client/${client_id}`}
-              className="underline"
-            >
+            <Link href={`/admin/client/${client_id}`} className="underline">
               {client}
             </Link>
           </div>

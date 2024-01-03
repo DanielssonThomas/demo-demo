@@ -7,9 +7,13 @@ export async function POST(request: Request) {
   const reqData = await request.json();
   const supabase = createClient(cookies());
   const { id } = reqData;
+  const { verified } = reqData;
 
   const { error }: { data: User | null; error: PostgrestError | null } =
-    await supabase.from("User").update({ verified: true }).match({ id: id });
+    await supabase
+      .from("User")
+      .update({ verified: verified })
+      .match({ id: id });
 
   if (error) {
     console.log(error);
