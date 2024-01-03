@@ -1,4 +1,5 @@
 import LoadingAnim from "@/components/global/LoadingAnim";
+import PrimaryButton from "@/components/buttons/PrimaryButton";
 import { useEffect, useState } from "react";
 
 export const User = ({ id }: { id: number }) => {
@@ -81,9 +82,11 @@ export const User = ({ id }: { id: number }) => {
             onClick={() => setVerified(!verified)}
           />
         </div>
-        <button className="absolute right-2 bottom-2 bg-[#dbdbdb] border-[1px] border-black border-solid rounded-md px-4 py-2">
-          Save changes
-        </button>
+        <PrimaryButton
+          buttonText="save changes"
+          className="absolute right-2 bottom-2 bg-[#dbdbdb] border-[1px] border-black border-solid rounded-md px-4 py-2 text-white"
+          onClick={() => console.log("clicked")}
+        />
       </section>
     </form>
   );

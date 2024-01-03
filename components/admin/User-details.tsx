@@ -1,6 +1,7 @@
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-
+import PrimaryLink from "../links/PrimaryLink";
+import PrimaryButton from "../buttons/PrimaryButton";
 type UserDetailsProps = {
   id: number | null | undefined;
   name: string;
@@ -9,7 +10,6 @@ type UserDetailsProps = {
 };
 
 const UserDetails = ({ id, name, role, verified }: UserDetailsProps) => {
-  console.log("name, verified :>> ", name, verified);
   const router = useRouter();
   const verifyUser = async () => {
     const data = await fetch("/api/post/set-user-verification", {
@@ -41,20 +41,18 @@ const UserDetails = ({ id, name, role, verified }: UserDetailsProps) => {
           </div>
         </section>
         {role === "client" && (
-          <Link
+          <PrimaryLink
             href={`/admin/client/${id}`}
-            className="absolute left-4 bottom-4 hover:underline"
-          >
-            Client page
-          </Link>
+            linkText="Client page"
+            className="absolute left-4 bottom-4  text-white"
+          />
         )}
 
-        <button
-          className="absolute right-4 bottom-4 hover:underline"
+        <PrimaryButton
+          buttonText={`${verified ? "unverify" : "verify"} user`}
           onClick={verifyUser}
-        >
-          {verified ? "unverify" : "verify"} user
-        </button>
+          className="absolute right-4 bottom-4 text-white"
+        />
       </div>
     </div>
   );
