@@ -1,3 +1,5 @@
+import PrimaryButton from "./PrimaryButton";
+
 const SignupButton = ({
   className,
   onClick,
@@ -5,7 +7,8 @@ const SignupButton = ({
   className?: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }) => {
-  return <button onClick={onClick}>Sign up for event</button>;
+  // return <button onClick={onClick}>Sign up for event</button>;
+  return <PrimaryButton className={className} buttonText="Sign up for event" onClick={onClick} />;
 };
 
 export default SignupButton;
