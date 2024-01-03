@@ -1,101 +1,20 @@
 "use client";
-import { useState, useEffect } from "react";
-import Controller from "@/components/admin/controller";
-import EventDetails from "@/components/admin/Event-details";
-import UserDetails from "@/components/admin/User-details";
 
-const Admin = ({
-  searchParams,
-}: {
-  searchParams: { type: "user" | "event"; id: number };
-}) => {
-  const [events, setEvents] = useState<TableClientEvent[] | null>(null);
-  const [event, setEvent] = useState<TableClientEvent | null>(null);
-  const [users, setUsers] = useState<User[] | null>(null);
-  const [user, setUser] = useState<User | null>(null);
+import Link from "next/link";
 
-  const getEvents = async () => {
-    const data = await fetch("/api/get/events", {
-      method: "GET",
-    });
-    const res = await data.json();
-
-    setEvents(res.data);
-    console.log("Events admin data: ", res.data);
-  };
-
-  const getEvent = async () => {
-    const event = events?.find(({ id }) => id == searchParams.id);
-    setEvent(event ?? null);
-  };
-
-  const getUsers = async () => {
-    const data = await fetch("/api/get/users", {
-      method: "GET",
-    });
-    const res = await data.json();
-
-    setUsers(res.data);
-    console.log("Users admin data: ", res.data);
-  };
-
-  const getUser = () => {
-    const user = users?.find(({ id }) => id == searchParams.id);
-    setUser(user ?? null);
-  };
-
-  useEffect(() => {
-    getEvents();
-    getUsers();
-  }, []);
-
-  useEffect(() => {
-    if (searchParams.type !== null) {
-      if (searchParams.type === "event") getEvent();
-      if (searchParams.type === "user") getUser();
-    }
-  }, [searchParams]);
-
-  return events ? (
-    <div className="w-full h-screen bg-[#EDEDED]">
-      {searchParams.type === "event" && event !== null ? (
-        <EventDetails
-          id={event.id}
-          client={event?.client ?? "-"}
-          date={event?.date ?? "-"}
-          location={event?.Location.name ?? "-"}
-          address={event?.Location.address ?? "-"}
-          product_name={event?.product_name ?? "-"}
-          product_stock={event?.product_stock ?? 0}
-          supplier={event?.supplier ?? "-"}
-          units_used={event?.units_used ?? 0}
-          start_time={event.start_time}
-          end_time={event.end_time}
-          comment={event.comment ?? ""}
-          travels_cost={event.travels_cost}
-          verified={event.verified}
-          active={event.active}
-          client_id={event.client_id ?? 0}
-        />
-      ) : (
-        <></>
-      )}
-
-      {searchParams.type === "user" && user !== null ? (
-        <UserDetails
-          id={user.id}
-          name={user?.name ?? "-"}
-          role={user?.role ?? "-"}
-          verified={user?.verified}
-        />
-      ) : (
-        <></>
-      )}
-
-      <Controller Events={events} Users={users} />
+const Admin = () => {
+  return (
+    <div className="w-full h-screen bg-[#170a0a]">
+      <section className="flex flex-col justify-center items-center w-screen h-[60vh]">
+        <div className="w-[25vw] h-[25vh] bg-[#EDEDED] text-black text-center">
+          <h2 className="text-2xl">Select view:</h2>
+          <div className="flex flex-col">
+            <Link href={"/admin/events"}>Events</Link>
+            <Link href={"/admin/users"}>Users</Link>
+          </div>
+        </div>
+      </section>
     </div>
-  ) : (
-    <></>
   );
 };
 export default Admin;

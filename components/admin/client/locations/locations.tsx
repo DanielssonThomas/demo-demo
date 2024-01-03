@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Location } from "./location";
 import { CreateLocation } from "../create-location";
+import LoadingAnim from "@/components/global/LoadingAnim";
 
 export const Locations = ({ id }: { id: number }) => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -27,18 +28,7 @@ export const Locations = ({ id }: { id: number }) => {
   }, [createLocationActive, deleteLocationActive]);
 
   if (loading && locations === null) {
-    return (
-      <div className="flex flex-col justify-center items-center w-[25vw] h-[100vh] border-x-[1px] border-solid border-black">
-        <div
-          className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] text-black dark:text-white"
-          role="status"
-        >
-          <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-            Loading...
-          </span>
-        </div>
-      </div>
-    );
+    return <LoadingAnim width={"25vw"} />;
   }
 
   return (

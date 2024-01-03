@@ -3,13 +3,19 @@ import Table from "../table";
 import Filter from "../filter";
 import { useEffect, useState } from "react";
 
-type ControllerProps = {
-  Events: TableClientEvent[] | null;
-  Users: User[] | null;
+type UsersControllerProps = {
+  type: "users";
+  data: User[] | null;
 };
 
-export const Controller = ({ Events, Users }: ControllerProps) => {
-  const [show, setShow] = useState<"users" | "events">("events");
+type EventsControllerProps = {
+  type: "events";
+  data: TableClientEvent[] | null;
+};
+
+type ControllerProps = UsersControllerProps | EventsControllerProps;
+
+export const Controller = ({ type, data }: ControllerProps) => {
 
   const [showVerified, setShowVerified] = useState<boolean | null>(null);
 
@@ -18,15 +24,16 @@ export const Controller = ({ Events, Users }: ControllerProps) => {
   return (
     <div className="text-black m-8">
       <Filter
-        setShow={setShow}
+        type={type}
         setShowVerified={setShowVerified}
         setSortDate={setSortDate}
       />
-      {show === "events" ? (
-        <Table show="events" Events={Events} showVerified={showVerified} />
+      {type === "events" ? (
+        <Table show="events" Events={data} showVerified={showVerified} />
       ) : (
-        <Table show="users" Users={Users} showVerified={showVerified} />
+        <Table show="users" Users={data} showVerified={showVerified} />
       )}
+       
     </div>
   );
 };

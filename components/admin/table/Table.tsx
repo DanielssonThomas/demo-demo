@@ -21,6 +21,7 @@ export const Table = (TableProps: TableProps) => {
       <EventsTable
         events={TableProps.Events}
         showVerified={TableProps.showVerified}
+        sortBy="latest"
       />
     );
   }
