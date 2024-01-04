@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { DeleteEvent } from "../delete-event";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 
@@ -59,7 +59,7 @@ export const Event = ({
   const [formLocations, setFormLocations] = useState<DBLocation[] | null>(
     locations
   );
-
+  const [formComment, setFormComment] = useState<string | null>(comment);
   useEffect(() => {
     const newFormLocations = formLocations;
     if (!loaded) {
@@ -95,7 +95,7 @@ export const Event = ({
       className="m-2 p-4 text-sm relative border-[1px] border-solid border-black rounded-md"
     >
       {deleteEventActive && (
-        <DeleteEvent id={id} setPopUpActive={setDeleteEventActive} />
+        <DeleteEvent key={id} id={id} setPopUpActive={setDeleteEventActive} />
       )}
       <button
         onClick={(e: any) => {
@@ -119,7 +119,9 @@ export const Event = ({
           }}
         >
           {formLocations?.map((loc) => (
-            <option value={loc.id ?? ""}>{loc.name}</option>
+            <option key={loc.id} value={loc.id ?? ""}>
+              {loc.name}
+            </option>
           ))}
         </select>
       </div>
@@ -133,7 +135,7 @@ export const Event = ({
           <input
             name="date"
             type="date"
-            value={date ?? ""}
+            defaultValue={date ?? ""}
             className="bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm"
           />
         </div>
@@ -182,7 +184,7 @@ export const Event = ({
             name="units_used"
             min={0}
             max={product_stock}
-            value={units_used ?? 0}
+            defaultValue={units_used ?? 0}
             className="bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm pl-2"
           />
         </div>
@@ -191,10 +193,9 @@ export const Event = ({
         <h3 className="font-bold">Comment:</h3>
         <textarea
           name="comment"
-          placeholder={comment === "" ? "No comment" : ""}
-        >
-          {comment}
-        </textarea>
+          defaultValue={comment === "" ? "No comment" : ""}
+          onChange={(e) => setFormComment(e.target.value)}
+        ></textarea>
       </div>
       <div className="flex gap-2">
         <h3 className="font-bold">Travel cost:</h3>
@@ -207,7 +208,7 @@ export const Event = ({
           name="verified"
           id=""
           checked={formVerified ?? false}
-          onClick={() => setFormVerified(!formVerified)}
+          onChange={() => setFormVerified(!formVerified)}
         />
       </div>
       <div className="flex gap-2">
@@ -217,10 +218,11 @@ export const Event = ({
           name="active"
           id=""
           checked={formActive ?? false}
-          onClick={() => setFormActive(!formActive)}
+          onChange={() => setFormActive(!formActive)}
         />
       </div>
       <PrimaryButton
+        key={id}
         buttonText="save changes"
         className="absolute right-2 bottom-2 bg-[#dbdbdb] border-[1px] border-black border-solid rounded-md px-4 py-2 text-white"
         onClick={() => console.log("clicked")}

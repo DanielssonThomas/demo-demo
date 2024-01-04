@@ -41,6 +41,7 @@ export const Locations = ({ id }: { id: number }) => {
       )}
       {locations?.map((location) => (
         <Location
+          key={location.id}
           id={location.id}
           locationName={location.name ?? ""}
           clientAddress={location.address ?? ""}

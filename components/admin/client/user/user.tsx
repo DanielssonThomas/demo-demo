@@ -79,7 +79,7 @@ export const User = ({ id }: { id: number }) => {
             type="checkbox"
             name="verified"
             checked={verified ?? false}
-            onClick={() => setVerified(!verified)}
+            onChange={() => setVerified(!verified)}
           />
         </div>
         <PrimaryButton

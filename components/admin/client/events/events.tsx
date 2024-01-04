@@ -57,6 +57,7 @@ export const Events = ({ id }: EventsProps) => {
       )}
       {events?.map((event) => (
         <Event
+          key={event.id}
           id={event.id}
           Location={event.Location}
           active={event.active}
