@@ -18,7 +18,6 @@ const LogOutButton = ({className}: {className?: string}) => {
     router.push("/login");
   };
 
-  // return <button onClick={logout}>Logout</button>;
   return <PrimaryButton className={className} buttonText="Logout" onClick={logout} />;
 };
 
