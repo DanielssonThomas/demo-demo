@@ -17,11 +17,15 @@ const NavBar = () => {
 
     const res = await data.json();
 
-    setUserRole(res.data.role);
+    if (res.data == null) {
+      setUserRole(res.data);
+    } else {
+      setUserRole(res.data.role);
+    }
 
     return;
   };
-  // demonstrator/events
+
   useEffect(() => {
     getUserInfo();
   }, [pathname]);

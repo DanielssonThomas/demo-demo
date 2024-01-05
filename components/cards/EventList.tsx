@@ -10,6 +10,10 @@ const EventList = () => {
   const [allEventsInfo, setAllEventsInfo] = useState<TableClientEvent[] | null>(null);
   const [eventInfo, setEventInfo] = useState<TableClientEvent | null>(null);
   const [eventInfoStyling, setEventInfoStyling] = useState("hidden");
+  const [eventDemonstrators, setEventDemonstrators] = useState({
+    eventId: "",
+    demonstrator: "",
+  });
   const [userInfo, setUserInfo] = useState({
     id: "",
     name: "",
@@ -29,6 +33,24 @@ const EventList = () => {
     const info = await res.data;
 
     setAllEventsInfo(info);
+  };
+
+  const getEventDemonstrator = async (demonstratorId: number | null) => {
+    if (demonstratorId == null) {
+      console.log("no demonstrator");
+      return "";
+    }
+    const bodyData = {id: demonstratorId};
+
+    const data = await fetch("/api/post/get-user", {
+      method: "POST",
+      body: JSON.stringify(bodyData),
+    });
+    const res = await data.json();
+
+    console.log(res);
+
+    return res.id;
   };
 
   const getUserInfo = async () => {
@@ -58,7 +80,7 @@ const EventList = () => {
   };
 
   const SignUpDemonstrator = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    if (eventInfo?.demonstrator != null) {
+    if (eventInfo?.demonstrator_id != null) {
       console.log("already has demonstrator");
       return;
     } else {
@@ -73,8 +95,6 @@ const EventList = () => {
         body: JSON.stringify(bodyData),
       });
       const res = await data.json();
-
-      console.log(res);
     } catch (error) {
       console.log(error);
     }
@@ -109,9 +129,9 @@ const EventList = () => {
               address={event.Location.address}
               supplier={event.supplier}
               date={event.date}
-              startTime={event.start_time}
-              endTime={event.end_time}
-              demonstrator={event.demonstrator}
+              startTime={event.start_time == null ? event.start_time : event.start_time.slice(0, 5)}
+              endTime={event.end_time == null ? event.end_time : event.end_time.slice(0, 5)}
+              demonstrator={`${event.demonstrator_id}`}
               key={event.id}
               onClick={getClickedEvent}
             />
@@ -119,20 +139,25 @@ const EventList = () => {
         </tbody>
       </table>
       <div
-        className={`bg-red-500 absolute z-10 border-[1px] border-solid rounded-sm border-black transition-all duration-300 ${eventInfoStyling}`}
+        className={`bg-red-500 absolute z-10 border-[1px] border-solid rounded-sm border-black transition-all duration-300 left-[30%] top-[20%] ${eventInfoStyling}`}
       >
         <div>
           {eventInfo?.id != null && (
             <EventInfoCard
-              className=""
               client={eventInfo.client}
               location={eventInfo.Location.name}
               address={eventInfo.Location.address}
               suplier={eventInfo.supplier}
               date={eventInfo.date}
-              startTime={eventInfo.start_time}
-              endTime={eventInfo.end_time}
-              demonstrator={eventInfo.demonstrator}
+              startTime={
+                eventInfo.start_time == null
+                  ? eventInfo.start_time
+                  : eventInfo.start_time.slice(0, 5)
+              }
+              endTime={
+                eventInfo.end_time == null ? eventInfo.end_time : eventInfo.end_time.slice(0, 5)
+              }
+              demonstrator={`${eventInfo.demonstrator_id}`}
               product={eventInfo.product_name}
               productStock={eventInfo.product_stock}
               unitsUsed={eventInfo.units_used}
@@ -148,7 +173,7 @@ const EventList = () => {
         {eventInfo?.demonstrator == null && userInfo.role == "demonstrator" && (
           <SignupButton onClick={SignUpDemonstrator} />
         )} */}
-          {eventInfo?.demonstrator == null && userInfo.role == "admin" && (
+          {eventInfo?.demonstrator_id == null && userInfo.role == "admin" && (
             <SignupButton onClick={SignUpDemonstrator} />
           )}
         </div>

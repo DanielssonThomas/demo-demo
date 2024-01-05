@@ -21,7 +21,12 @@ export async function POST(request: Request) {
   const eventId = reqForm.eventId;
   const userName = reqForm.userName;
 
-  const {error} = await supabase.from("Event").update({demonstrator: userName}).eq("id", eventId);
+  //TODO check if event already has demonstrator
+
+  const {error} = await supabase
+    .from("Event")
+    .update({demonstrator_id: reqForm.userId})
+    .eq("id", eventId);
 
   return NextResponse.json({error: error, message: returnMessage});
   // return NextResponse.json({message: returnMessage});
