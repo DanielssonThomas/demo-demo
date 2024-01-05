@@ -63,7 +63,7 @@ export const Events = ({ id }: EventsProps) => {
           active={event.active}
           comment={event.comment}
           date={event.date ?? ""}
-          demonstrator={event.demonstrator}
+          demonstrator_id={event.demonstrator_id}
           start_time={event.start_time}
           end_time={event.end_time}
           product_name={event.product_name}

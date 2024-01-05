@@ -16,7 +16,7 @@ export interface Database {
           client_id: number | null
           comment: string | null
           date: string | null
-          demonstrator: string | null
+          demonstrator_id: number | null
           end_time: string | null
           id: number
           location_id: number | null
@@ -34,7 +34,7 @@ export interface Database {
           client_id?: number | null
           comment?: string | null
           date?: string | null
-          demonstrator?: string | null
+          demonstrator_id?: number | null
           end_time?: string | null
           id?: number
           location_id?: number | null
@@ -52,7 +52,7 @@ export interface Database {
           client_id?: number | null
           comment?: string | null
           date?: string | null
-          demonstrator?: string | null
+          demonstrator_id?: number | null
           end_time?: string | null
           id?: number
           location_id?: number | null
@@ -75,6 +75,13 @@ export interface Database {
           {
             foreignKeyName: "Event_client_id_fkey"
             columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "User"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "Event_demonstrator_id_fkey"
+            columns: ["demonstrator_id"]
             isOneToOne: false
             referencedRelation: "User"
             referencedColumns: ["id"]
@@ -153,7 +160,7 @@ export interface Database {
           {
             foreignKeyName: "User_user_id_fkey"
             columns: ["user_id"]
-            isOneToOne: false
+            isOneToOne: true
             referencedRelation: "users"
             referencedColumns: ["id"]
           }

@@ -8,7 +8,7 @@ declare global {
     client_id: number | null;
     comment: string | null;
     date: string | null;
-    demonstrator: string | null;
+    demonstrator_id: number | null;
     id: number;
     location_id: number | null;
     product_name: string | null;

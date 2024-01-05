@@ -12,7 +12,7 @@ type EventProps = {
   active: boolean | null;
   verified: boolean | null;
   product_name: string | null;
-  demonstrator: string | null;
+  demonstrator_id: number | null;
   product_stock: number;
   supplier: string | null;
   travels_cost: number | null;
@@ -33,7 +33,7 @@ export const Event = ({
   active,
   verified,
   product_name,
-  demonstrator,
+  demonstrator_id,
   product_stock,
   supplier,
   travels_cost,
