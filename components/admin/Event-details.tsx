@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Input from "../global/FormComponents/Input";
 import { useRouter, usePathname, redirect } from "next/navigation";
 import { useState, useEffect } from "react";
 
@@ -48,6 +49,7 @@ const EventDetails = ({
   const [endTime, setEndTime] = useState<string | null>(end_time);
   const [formVerified, setFormVerified] = useState<boolean | null>(verified);
   const [formActive, setFormActive] = useState<boolean | null>(active);
+  const [formComment, setFormComment] = useState<string | null>(comment);
 
   const getLocations = async () => {
     const LocationsData = await fetch("/api/get/locations", {
@@ -83,127 +85,108 @@ const EventDetails = ({
         <div className="text-center">
           <h2 className="text-xl underline">CLIENT</h2>
         </div>
-        <form action={(e) => updateEvent(e)}>
-          <input type="hidden" name="id" value={id} />
-          <div className="flex gap-2">
-            <h3 className="font-bold">Clients:</h3>
-            <Link href={`/admin/client/${client_id}`} className="underline">
-              {client}
-            </Link>
-          </div>
-          <div>
-            <label htmlFor="location" className="font-bold">
-              Locations:
-            </label>
-            <select
-              name="location_id"
-              className="bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm"
+        <form
+          action={(e) => updateEvent(e)}
+          className="flex flex-col justify-center items-center w-full"
+        >
+          <section className="flex flex-col gap-1 w-2/3 h-1/2">
+            <input type="hidden" name="id" value={id} />
+
+            <div className="flex justify-between w-full">
+              <h3 className="font-bold">Clients:</h3>
+              <Link href={`/admin/client/${client_id}`} className="underline">
+                {client}
+              </Link>
+            </div>
+
+            <div className="flex justify-between w-full">
+              <label htmlFor="location" className="font-bold">
+                Locations:
+              </label>
+              <select
+                name="location_id"
+                className="bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm"
+                onChange={(e) => {
+                  setFormAddress(e.target.value);
+                }}
+              >
+                {locations?.map((loc) => (
+                  <option value={loc.id ?? ""}>{loc.name}</option>
+                ))}
+              </select>
+            </div>
+
+            <Input type="readOnly" headline="Address" value={formAddress} />
+
+            <Input type="date" headline="Date" value={date} name="date" />
+
+            <Input
+              type="time"
+              headline="Start time"
+              value={startTime ?? ""}
+              name="start_time"
               onChange={(e) => {
-                setFormAddress(e.target.value);
+                setStartTime(e.target.value);
               }}
-            >
-              {locations?.map((loc) => (
-                <option value={loc.id ?? ""}>{loc.name}</option>
-              ))}
-            </select>
-          </div>
-          <div className="flex gap-2">
-            <h3 className="font-bold">Address:</h3>
-            <p>{formAddress}</p>
-          </div>
-          <section className="flex gap-2 ">
-            <div className="flex gap-2">
-              <h3 className="font-bold">Date:</h3>
-              <input
-                name="date"
-                type="date"
-                value={date}
-                className="bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm"
-              />
-            </div>
-            <div className="flex gap-2">
-              <h3 className="font-bold">Start time:</h3>
-              <input
-                name="start_time"
-                type="time"
-                value={startTime ?? ""}
-                className="bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm"
-                onChange={(e) => {
-                  setStartTime(e.target.value);
-                }}
-              />
-            </div>
-            <div className="flex gap-2">
-              <h3 className="font-bold">End time:</h3>
-              <input
-                name="end_time"
-                type="time"
-                value={endTime ?? ""}
-                className="bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm"
-                onChange={(e) => {
-                  setEndTime(e.target.value);
-                }}
-              />
-            </div>
-          </section>
-          <div className="flex gap-2">
-            <h3 className="font-bold">Product name:</h3>
-            <p>{product_name}</p>
-          </div>
-          <div className="flex gap-2">
-            <h3 className="font-bold">Supplier:</h3>
-            <p>{supplier}</p>
-          </div>
-          <section className="flex gap-2">
-            <div className="flex gap-2">
-              <h3 className="font-bold">Stock:</h3>
-              <p>{product_stock}</p>
-            </div>
-            <div className="flex gap-2">
-              <h3 className="font-bold">units used:</h3>
-              <input
-                type="number"
-                name="units_used"
-                min={0}
-                max={product_stock}
-                value={units_used ?? 0}
-                className="bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm pl-2"
-              />
-            </div>
-          </section>
-          <div className="flex flex-col gap-2">
-            <h3 className="font-bold">Comment:</h3>
-            <textarea
+            />
+            <Input
+              type="time"
+              headline="End time"
+              value={endTime ?? ""}
+              name="end_time"
+              onChange={(e) => {
+                setEndTime(e.target.value);
+              }}
+            />
+
+            <Input
+              type="readOnly"
+              headline="Product name"
+              value={product_name}
+            />
+
+            <Input type="readOnly" headline="Supplier" value={supplier} />
+
+            <Input type="readOnly" headline="Stock" value={product_stock} />
+            <Input
+              type="number"
+              headline="Units used"
+              name="units_used"
+              value={units_used ?? 0}
+              min={0}
+              max={product_stock}
+            />
+
+            <Input
+              type="textarea"
+              headline="Comment"
               name="comment"
-              placeholder={comment === "" ? "No comment" : ""}
-            >
-              {comment}
-            </textarea>
-          </div>
-          <div className="flex gap-2">
-            <h3 className="font-bold">Travel cost:</h3>
-            <p>{travels_cost === null ? "Not entered" : travels_cost}</p>
-          </div>
-          <div className="flex gap-2">
-            <h3 className="font-bold">Verified:</h3>
-            <input
+              value={formComment ?? ""}
+              onChange={(e) => setFormComment(e.target.value)}
+            />
+
+            <Input
+              type="readOnly"
+              headline="Travel cost"
+              value={travels_cost === null ? "Not entered" : travels_cost}
+            />
+
+            <Input
               type="checkbox"
+              headline="Verified"
               name="verified"
-              id=""
-              checked={formVerified ?? false}
+              isChecked={formVerified ?? false}
               onClick={() => setFormVerified(!formVerified)}
             />
-          </div>
-          <div className="flex gap-2">
-            <h3 className="font-bold">Active:</h3>
-            <input
+
+            <Input
               type="checkbox"
+              headline="Active"
               name="active"
-              id=""
-              checked={formActive ?? false}
+              isChecked={formActive ?? false}
               onClick={() => setFormActive(!formActive)}
             />
-          </div>
+          </section>
           <button className="absolute right-8 bottom-8 bg-[#dbdbdb] border-[1px] border-black border-solid rounded-md px-4 py-2">
             Save changes
           </button>
