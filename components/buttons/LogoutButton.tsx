@@ -1,7 +1,7 @@
 "use client";
 
 import {useRouter} from "next/navigation";
-import PrimaryButton from "./PrimaryButton";
+import SecondaryButton from "./SecondaryButton";
 
 const LogOutButton = ({className}: {className?: string}) => {
   const router = useRouter();
@@ -18,7 +18,7 @@ const LogOutButton = ({className}: {className?: string}) => {
     router.push("/login");
   };
 
-  return <PrimaryButton className={className} buttonText="Logout" onClick={logout} />;
+  return <SecondaryButton className={className} buttonText="Logout" onClick={logout} />;
 };
 
 export default LogOutButton;

@@ -10,8 +10,8 @@ const PrimaryLink = ({
   href: string;
 }) => {
   return (
-    <Link className={`${className}`} href={href}>
-      <div className="bg-red-400 px-4 py-2 border-2 border-solid border-gray-200 rounded-full inline-block">
+    <Link className={`text-white ${className}`} href={href}>
+      <div className="bg-indigo-500 px-4 py-2 border-2 border-solid border-gray-200 rounded-full inline-block">
         <p>{linkText}</p>
       </div>
     </Link>
