@@ -79,7 +79,7 @@ const EventDetails = ({
   return (
     <div className="absolute">
       <div
-        className="fixed w-[100vw] h-[100vh] top-0 left-0 bg-white opacity-50 z-20"
+        className="fixed w-[100vw] h-[100vh] top-0 left-0 bg-white dark:bg-black opacity-50 z-20"
         onClick={() => router.back()}
       />
       <section className="fixed top-[12.5vh] right-[25vw] left-[25vw] bottom-0 w-1/2 h-3/4 border-[1px] border-solid border-black rounded-md bg-bg-light text-black dark:text-white p-4 z-40 bg-light-bg dark:bg-dark-bg">
