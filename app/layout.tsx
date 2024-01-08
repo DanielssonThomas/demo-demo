@@ -1,4 +1,4 @@
-import { GeistSans } from "geist/font/sans";
+import {GeistSans} from "geist/font/sans";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
@@ -16,18 +16,14 @@ export const metadata = {
 
 //TODO check if user is signed in, only then show footer and navbar
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={GeistSans.className}>
       <body className="bg-background text-foreground">
         <Toast />
         <NavBar />
         <main>{children}</main>
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   );
