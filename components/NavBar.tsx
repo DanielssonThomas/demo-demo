@@ -31,7 +31,7 @@ const NavBar = () => {
   }, [pathname]);
 
   return userRole ? (
-    <nav className="p-6 flex gap-6 align-center">
+    <nav className="p-6 flex gap-6 align-center bg-[#EDEDED]">
       <PrimaryLink href={"/dashboard"} linkText="Home" />
       {userRole == "client" && (
         <PrimaryLink href={"/client/create-event"} linkText="Create event" />
