@@ -12,9 +12,11 @@ type InputTextProps = {
   type: "text";
   name: string;
   headline: string;
+  value: string;
   wrapperClass?: string;
   headlineClass?: string;
   inputClass?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 };
 
 type InputDateProps = {
@@ -80,7 +82,15 @@ type InputProps =
 
 const Input = (props: InputProps) => {
   if (props.type === "text") {
-    const { headline, name, wrapperClass, headlineClass, inputClass } = props;
+    const {
+      headline,
+      name,
+      wrapperClass,
+      headlineClass,
+      inputClass,
+      onChange,
+      value,
+    } = props;
     return (
       <div
         className={`flex justify-between w-full text-black dark:text-white ${wrapperClass}`}
@@ -89,7 +99,9 @@ const Input = (props: InputProps) => {
         <input
           type="text"
           name={name}
+          value={value}
           className={`px-2 border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg ${inputClass}`}
+          onChange={onChange}
         />
       </div>
     );

@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { DeleteEvent } from "../delete-event";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
+import Input from "@/components/global/FormComponents/Input";
 
 type EventProps = {
   id: number;
@@ -92,7 +93,7 @@ export const Event = ({
   return (
     <form
       action={(e) => updateEvent(e)}
-      className="m-2 p-4 text-sm relative border-[1px] border-solid border-black rounded-md"
+      className="m-2 p-4 text-sm relative border-[1px] border-solid border-black dark:border-white rounded-md"
     >
       {deleteEventActive && (
         <DeleteEvent key={id} id={id} setPopUpActive={setDeleteEventActive} />
@@ -113,7 +114,7 @@ export const Event = ({
         </label>
         <select
           name="location_id"
-          className="bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm"
+          className="border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg"
           onChange={(e) => {
             setSelectedFormLocationId(parseInt(e.target.value));
           }}
@@ -125,100 +126,79 @@ export const Event = ({
           ))}
         </select>
       </div>
-      <div className="flex gap-2">
-        <h3 className="font-bold">Address:</h3>
-        <p>{formAddress}</p>
+      <div className="w-[20vw]">
+        <Input type="readOnly" headline="Address" value={formAddress} />
       </div>
       <section className="flex gap-2 ">
-        <div className="flex gap-2">
-          <h3 className="font-bold">Date:</h3>
-          <input
-            name="date"
-            type="date"
-            defaultValue={date ?? ""}
-            className="bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm"
-          />
+        <div className="flex flex-col justify-center items-center w-[15vw]">
+          <Input type="date" headline="Date" name="date" value={date ?? ""} />
         </div>
-        <div className="flex gap-2">
-          <h3 className="font-bold">Start time:</h3>
-          <input
-            name="start_time"
+        <div className="flex flex-col justify-center items-center w-[15vw]">
+          <Input
             type="time"
+            headline="Start time"
+            name="start_time"
             value={startTime ?? ""}
-            className="bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm"
             onChange={(e) => {
               setStartTime(e.target.value);
             }}
           />
         </div>
-        <div className="flex gap-2">
-          <h3 className="font-bold">End time:</h3>
-          <input
-            name="end_time"
+        <div className="flex flex-col justify-center items-center w-[15vw]">
+          <Input
             type="time"
+            headline="End time"
+            name="end_time"
             value={endTime ?? ""}
-            className="bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm"
             onChange={(e) => {
               setEndTime(e.target.value);
             }}
           />
         </div>
       </section>
-      <div className="flex gap-2">
-        <h3 className="font-bold">Product name:</h3>
-        <p>{product_name}</p>
+      <div className="w-[12vw]">
+        <Input type="readOnly" headline="Product name" value={product_name} />
+        <Input type="readOnly" headline="Supplier" value={supplier} />
       </div>
-      <div className="flex gap-2">
-        <h3 className="font-bold">Supplier:</h3>
-        <p>{supplier}</p>
-      </div>
-      <section className="flex gap-2">
-        <div className="flex gap-2">
-          <h3 className="font-bold">Stock:</h3>
-          <p>{product_stock}</p>
-        </div>
-        <div className="flex gap-2">
-          <h3 className="font-bold">units used:</h3>
-          <input
-            type="number"
-            name="units_used"
-            min={0}
-            max={product_stock}
-            defaultValue={units_used ?? 0}
-            className="bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm pl-2"
-          />
-        </div>
+      <section className="flex gap-2 w-[18vw]">
+        <Input type="readOnly" headline="Stock" value={product_stock} />
+        <Input
+          type="number"
+          headline="Units used"
+          name="units_used"
+          value={units_used ?? 0}
+          min={0}
+          max={product_stock}
+        />
       </section>
-      <div className="flex flex-col gap-2">
-        <h3 className="font-bold">Comment:</h3>
-        <textarea
-          name="comment"
-          defaultValue={comment === "" ? "No comment" : ""}
-          onChange={(e) => setFormComment(e.target.value)}
-        ></textarea>
-      </div>
-      <div className="flex gap-2">
-        <h3 className="font-bold">Travel cost:</h3>
-        <p>{travels_cost === null ? "Not entered" : travels_cost}</p>
-      </div>
-      <div className="flex gap-2">
-        <h3 className="font-bold">Verified:</h3>
-        <input
-          type="checkbox"
-          name="verified"
-          id=""
-          checked={formVerified ?? false}
-          onChange={() => setFormVerified(!formVerified)}
+      <Input
+        type="textarea"
+        headline="Comment"
+        name="comment"
+        value={comment === "" ? "No comment" : ""}
+        onChange={(e) => setFormComment(e.target.value)}
+      />
+      <div className="w-[12vw]">
+        <Input
+          type="readOnly"
+          headline="Travel cost"
+          value={travels_cost === null ? "Not entered" : travels_cost}
         />
       </div>
-      <div className="flex gap-2">
-        <h3 className="font-bold">Active:</h3>
-        <input
+      <div className="w-[5vw]">
+        <Input
           type="checkbox"
+          headline="Verified"
+          isChecked={formVerified ?? false}
+          name="verified"
+          onClick={() => setFormVerified(!formVerified)}
+        />
+        <Input
+          type="checkbox"
+          headline="Active"
+          isChecked={formActive ?? false}
           name="active"
-          id=""
-          checked={formActive ?? false}
-          onChange={() => setFormActive(!formActive)}
+          onClick={() => setFormActive(!formVerified)}
         />
       </div>
       <PrimaryButton

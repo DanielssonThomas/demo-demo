@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { DeleteLocation } from "../delete-location";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
+import Input from "@/components/global/FormComponents/Input";
 
 type LocationProps = {
   id: number;
@@ -38,7 +39,7 @@ export const Location = ({
   return (
     <form
       action={(e: FormData) => updateLocation(e)}
-      className="flex flex-col gap-2 m-2 p-4 text-black border-[1px] border-solid border-black rounded-md relative h-[25vh]"
+      className="flex flex-col gap-2 m-2 p-4 text-black border-[1px] border-solid border-black dark:border-white rounded-md relative h-[25vh]"
     >
       {deleteLocationActive && (
         <DeleteLocation
@@ -56,31 +57,23 @@ export const Location = ({
       >
         X
       </button>
-      <div className="flex flex-col">
-        <input type="hidden" name="id" value={id} />
-        <label htmlFor="name" className="font-bold">
-          Name:
-        </label>
-        <input
-          type="text"
-          name="name"
-          className="px-2 py-1 border-[1px] border-solid border-black rounded-sm bg-[#EDEDED]"
-          value={name ?? ""}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </div>
-      <div className="flex flex-col">
-        <label htmlFor="address" className="font-bold">
-          Address:
-        </label>
-        <input
-          type="text"
-          name="address"
-          className="px-2 py-1 border-[1px] border-solid border-black rounded-sm bg-[#EDEDED]"
-          value={address ?? ""}
-          onChange={(e) => setAddress(e.target.value)}
-        />
-      </div>
+      <input type="hidden" name="id" value={id} />
+      <Input
+        type="text"
+        headline="Name"
+        name="name"
+        value={name ?? ""}
+        onChange={(e) => setName(e.target.value)}
+        wrapperClass="flex-col"
+      />
+      <Input
+        type="text"
+        headline="Address"
+        name="address"
+        value={address ?? ""}
+        onChange={(e) => setAddress(e.target.value)}
+        wrapperClass="flex-col"
+      />
       <PrimaryButton
         type="green"
         buttonText="save changes"

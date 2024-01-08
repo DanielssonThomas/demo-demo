@@ -1,5 +1,6 @@
 import LoadingAnim from "@/components/global/LoadingAnim";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
+import Input from "@/components/global/FormComponents/Input";
 import { useEffect, useState } from "react";
 
 export const User = ({ id }: { id: number }) => {
@@ -40,28 +41,27 @@ export const User = ({ id }: { id: number }) => {
   }
 
   return (
-    <form action={updateUser} className="w-[25vw] p-2">
+    <form
+      action={updateUser}
+      className="w-[25vw] p-2 text-black dark:text-white"
+    >
       <input type="hidden" name="id" value={id} />
-      <section className="flex flex-col gap-4 p-2 text-sm relative border-[1px] border-solid border-black rounded-md h-[25vh]">
-        <div className="w-full flex flex-col">
-          <label htmlFor="name" className="font-bold">
-            Name:
-          </label>
-          <input
-            type="text"
-            name="name"
-            className="px-2 py-1 border-[1px] border-solid border-black rounded-sm bg-[#EDEDED]"
-            value={name ?? ""}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
+      <section className="flex flex-col gap-4 p-2 text-sm relative border-[1px] border-solid border-black dark:border-white rounded-md h-[25vh]">
+        <Input
+          type="text"
+          headline="Name"
+          name="Name"
+          value={name ?? ""}
+          wrapperClass="flex-col"
+          onChange={(e) => setName(e.target.value)}
+        />
         <div className="w-full flex flex-col">
           <label htmlFor="name" className="font-bold">
             Role:
           </label>
           <select
             name="role"
-            className="px-2 py-1 border-[1px] border-solid border-black rounded-sm bg-[#EDEDED]"
+            className="border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg"
           >
             <option value={role === "client" ? "client" : "demonstrator"}>
               {role === "client" ? "client" : "demonstrator"}
