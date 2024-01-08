@@ -81,7 +81,7 @@ const EventDetails = ({
         className="fixed w-[100vw] h-[100vh] top-0 left-0 bg-white opacity-50 z-20"
         onClick={() => router.back()}
       />
-      <section className="fixed top-[12.5vh] right-[25vw] left-[25vw] bottom-0 w-1/2 h-3/4 border-[1px] border-solid border-black rounded-md bg-[#EDEDED] text-black p-4 z-40">
+      <section className="fixed top-[12.5vh] right-[25vw] left-[25vw] bottom-0 w-1/2 h-3/4 border-[1px] border-solid border-black rounded-md bg-bg-light text-black p-4 z-40">
         <div className="text-center">
           <h2 className="text-xl underline">CLIENT</h2>
         </div>

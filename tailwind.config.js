@@ -17,7 +17,7 @@ module.exports = {
         "dark-bg": "#1C1C1C",
         "light-text": "#F8F8F8",
         "btn-green": "#8CCA09",
-        "btn-red": "#DC48O9",
+        "light-green": "#6FA105",
         "btn-blue": "#3B81F6",
       },
     },
