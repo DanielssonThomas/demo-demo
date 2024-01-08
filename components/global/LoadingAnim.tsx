@@ -5,7 +5,7 @@ type LoadingAnimProps = {
 const LoadingAnim = ({ width }: LoadingAnimProps) => {
   return (
     <div
-      className={`flex flex-col justify-center items-center bg-[#EDEDED] ${
+      className={`flex flex-col justify-center items-center bg-light-bg dark:bg-dark-bg ${
         width !== null ? `w-[${width}]` : "w-[100vw]"
       } h-screen`}
     >

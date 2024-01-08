@@ -19,6 +19,7 @@ module.exports = {
         "btn-green": "#8CCA09",
         "light-green": "#6FA105",
         "btn-blue": "#3B81F6",
+        "btn-red": "#DC4809",
       },
     },
   },
