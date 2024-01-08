@@ -42,13 +42,15 @@ const UserDetails = ({ id, name, role, verified }: UserDetailsProps) => {
         </section>
         {role === "client" && (
           <PrimaryLink
+            type="default"
             href={`/admin/client/${id}`}
             linkText="Client page"
-            className="absolute left-4 bottom-4  text-white"
+            className="absolute left-4 bottom-4 text-white"
           />
         )}
 
         <PrimaryButton
+          type="default"
           buttonText={`${verified ? "unverify" : "verify"} user`}
           onClick={verifyUser}
           className="absolute right-4 bottom-4 text-white"

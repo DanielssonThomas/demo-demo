@@ -10,8 +10,8 @@ const Admin = () => {
         <div className="w-[25vw] h-[25vh] bg-[#EDEDED] text-black text-center">
           <h2 className="text-2xl">Select view:</h2>
           <div className="flex justify-around items-center h-full text-white">
-            <PrimaryLink href="/admin/events" linkText="Events" />
-            <PrimaryLink href="/admin/users" linkText="Users" />
+            <PrimaryLink type="red" href="/admin/events" linkText="Events" />
+            <PrimaryLink type="red" href="/admin/users" linkText="Users" />
           </div>
         </div>
       </section>

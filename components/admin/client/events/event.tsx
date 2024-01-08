@@ -222,6 +222,7 @@ export const Event = ({
         />
       </div>
       <PrimaryButton
+        type="green"
         key={id}
         buttonText="save changes"
         className="absolute right-2 bottom-2 bg-[#dbdbdb] border-[1px] border-black border-solid rounded-md px-4 py-2 text-white"

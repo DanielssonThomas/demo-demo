@@ -7,7 +7,14 @@ const SignupButton = ({
   className?: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }) => {
-  return <PrimaryButton className={className} buttonText="Sign up for event" onClick={onClick} />;
+  return (
+    <PrimaryButton
+      type="green"
+      className={className}
+      buttonText="Sign up for event"
+      onClick={onClick}
+    />
+  );
 };
 
 export default SignupButton;
