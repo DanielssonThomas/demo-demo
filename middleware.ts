@@ -2,6 +2,11 @@ import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "@/utils/supabase/middleware";
 
 export async function middleware(request: NextRequest) {
+  const hasThemeCookie = await request.cookies.has("theme");
+
+  if (!hasThemeCookie) {
+    request.cookies.set({ name: "theme", value: "" });
+  }
   try {
     // This `try/catch` block is only here for the interactive tutorial.
     // Feel free to remove once you have Supabase connected.
