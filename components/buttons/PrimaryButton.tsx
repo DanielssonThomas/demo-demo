@@ -9,7 +9,7 @@ const PrimaryButton = ({
 }) => {
   return (
     <button
-      className={`bg-indigo-500 px-4 py-2 rounded-full text-white ${className}`}
+      className={`bg-indigo-500 px-4 py-2 rounded-full text-white shadow-md ${className}`}
       onClick={onClick}
     >
       {buttonText}

@@ -11,7 +11,7 @@ const SecondaryLink = ({
 }) => {
   return (
     <Link className={`text-white ${className}`} href={href}>
-      <div className="bg-red-500 px-4 py-2 border-2 border-solid border-gray-200 rounded-full inline-block">
+      <div className="bg-red-500 px-4 py-2 rounded-full inline-block shadow-md">
         <p>{linkText}</p>
       </div>
     </Link>
