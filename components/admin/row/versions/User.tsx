@@ -1,4 +1,5 @@
 import { useRouter, usePathname } from "next/navigation";
+import TD from "../../tableDataCell/Td";
 
 type UserRowProps = {
   id: number;
@@ -12,13 +13,17 @@ export const UserRow = ({ id, name, role, verified }: UserRowProps) => {
   const pathname = usePathname();
   return (
     <tr
-      className="h-[3rem] border-[1px] border-solid rounded-sm border-black transition-all duration-300 hover:scale-[1.02] hover:p-4 
+      className="h-[3rem] border-[1px] border-solid rounded-sm border-black dark:border-white transition-all duration-300 hover:scale-[1.02] hover:p-4 
   cursor-pointer"
       onClick={() => router.push(pathname + `/${id}`)}
     >
-      <td className="text-center">{name}</td>
-      <td className="text-center">{role}</td>
-      <td className="text-center">{verified ? "true" : "false"}</td>
+      <TD type="default" text={name} />
+      <TD type="default" text={role} />
+      <TD
+        type="boolean"
+        text={verified ? "yes" : "no"}
+        boolean={verified ?? false}
+      />
     </tr>
   );
 };

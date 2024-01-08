@@ -12,11 +12,11 @@ const Toast = () => {
   const [isError, setIsError] = useState<boolean>(false);
 
   const getStatus = () => {
-    const statusString = searchParams.get("s");
+    const errorString = searchParams.get("e");
 
-    if (statusString !== null) {
-      const status = statusString === "true" ? true : false;
-      setIsError(status);
+    if (errorString !== null) {
+      const error = errorString === "true" ? true : false;
+      setIsError(error);
       setTrigger(true);
       setTimeout(() => {
         setTrigger(false);
