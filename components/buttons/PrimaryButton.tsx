@@ -6,7 +6,7 @@ const PrimaryButton = ({
 }: {
   className?: string;
   buttonText: string;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   type: "default" | "green" | "red" | "blue";
 }) => {
   return (

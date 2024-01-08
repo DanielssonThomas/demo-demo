@@ -2,6 +2,7 @@ import Link from "next/link";
 import Input from "../global/FormComponents/Input";
 import { useRouter, usePathname, redirect } from "next/navigation";
 import { useState, useEffect } from "react";
+import PrimaryButton from "../buttons/PrimaryButton";
 
 type EventDetailsProps = {
   id: number;
@@ -81,7 +82,7 @@ const EventDetails = ({
         className="fixed w-[100vw] h-[100vh] top-0 left-0 bg-white opacity-50 z-20"
         onClick={() => router.back()}
       />
-      <section className="fixed top-[12.5vh] right-[25vw] left-[25vw] bottom-0 w-1/2 h-3/4 border-[1px] border-solid border-black rounded-md bg-bg-light text-black p-4 z-40">
+      <section className="fixed top-[12.5vh] right-[25vw] left-[25vw] bottom-0 w-1/2 h-3/4 border-[1px] border-solid border-black rounded-md bg-bg-light text-black dark:text-white p-4 z-40 bg-light-bg dark:bg-dark-bg">
         <div className="text-center">
           <h2 className="text-xl underline">CLIENT</h2>
         </div>
@@ -105,7 +106,7 @@ const EventDetails = ({
               </label>
               <select
                 name="location_id"
-                className="bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm"
+                className="border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg"
                 onChange={(e) => {
                   setFormAddress(e.target.value);
                 }}
@@ -187,9 +188,11 @@ const EventDetails = ({
               onClick={() => setFormActive(!formActive)}
             />
           </section>
-          <button className="absolute right-8 bottom-8 bg-[#dbdbdb] border-[1px] border-black border-solid rounded-md px-4 py-2">
-            Save changes
-          </button>
+          <PrimaryButton
+            type="green"
+            buttonText="save changes"
+            className="absolute right-8 bottom-6"
+          />
         </form>
       </section>
     </div>

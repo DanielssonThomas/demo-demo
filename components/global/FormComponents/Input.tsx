@@ -82,12 +82,14 @@ const Input = (props: InputProps) => {
   if (props.type === "text") {
     const { headline, name, wrapperClass, headlineClass, inputClass } = props;
     return (
-      <div className={`flex justify-between w-full ${wrapperClass}`}>
+      <div
+        className={`flex justify-between w-full text-black dark:text-white ${wrapperClass}`}
+      >
         <h3 className={`font-bold ${headlineClass}`}>{headline}:</h3>
         <input
           type="text"
           name={name}
-          className={`px-2 border-[1px] border-solid border-black rounded-sm bg-[#EDEDED] ${inputClass}`}
+          className={`px-2 border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg ${inputClass}`}
         />
       </div>
     );
@@ -96,12 +98,13 @@ const Input = (props: InputProps) => {
   if (props.type === "textarea") {
     const { headline, name, value, onChange, placeHolder } = props;
     return (
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 text-black dark:text-white">
         <h3 className="font-bold">{headline}:</h3>
         <textarea
           name={name}
           placeholder={placeHolder === "" ? "No comment" : ""}
           onChange={onChange}
+          className="border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg"
         >
           {value}
         </textarea>
@@ -112,9 +115,15 @@ const Input = (props: InputProps) => {
   if (props.type === "readOnly") {
     const { headline, value, wrapperClass, headlineClass, inputClass } = props;
     return (
-      <div className={`flex justify-between w-full ${wrapperClass}`}>
+      <div
+        className={`flex justify-between w-full text-black dark:text-white ${wrapperClass}`}
+      >
         <h3 className={`font-bold ${headlineClass}`}>{headline}:</h3>
-        <p className={`px-2 rounded-sm bg-[#EDEDED] ${inputClass}`}>{value}</p>
+        <p
+          className={`px-2 border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg ${inputClass}`}
+        >
+          {value}
+        </p>
       </div>
     );
   }
@@ -123,7 +132,9 @@ const Input = (props: InputProps) => {
     const { headline, isChecked, name, onClick, headlineClass, wrapperClass } =
       props;
     return (
-      <div className={`flex justify-between w-full ${wrapperClass}`}>
+      <div
+        className={`flex justify-between w-full text-black dark:text-white ${wrapperClass}`}
+      >
         <h3 className={`font-bold ${headlineClass}`}>{headline}:</h3>
         <input
           type="checkbox"
@@ -146,13 +157,15 @@ const Input = (props: InputProps) => {
       onChange,
     } = props;
     return (
-      <div className={`flex justify-between w-full ${wrapperClass}`}>
+      <div
+        className={`flex justify-between w-full text-black dark:text-white ${wrapperClass}`}
+      >
         <h3 className={`font-bold ${headlineClass}`}>{headline}:</h3>
         <input
           name={name}
           type="date"
           value={value}
-          className={`bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm ${inputClass}`}
+          className={`border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg ${inputClass}`}
           onChange={onChange}
         />
       </div>
@@ -171,13 +184,15 @@ const Input = (props: InputProps) => {
     } = props;
 
     return (
-      <div className={`flex justify-between w-full ${wrapperClass}`}>
+      <div
+        className={`flex justify-between w-full text-black dark:text-white ${wrapperClass}`}
+      >
         <h3 className={`font-bold ${headlineClass}`}>{headline}:</h3>
         <input
           name={name}
           type="time"
           value={value}
-          className={`bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm ${inputClass}`}
+          className={`border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg ${inputClass}`}
           onChange={onChange}
         />
       </div>
@@ -196,7 +211,9 @@ const Input = (props: InputProps) => {
       wrapperClass,
     } = props;
     return (
-      <div className={`flex justify-between w-full ${wrapperClass}`}>
+      <div
+        className={`flex justify-between w-full text-black dark:text-white ${wrapperClass}`}
+      >
         <h3 className={`font-bold ${headlineClass}`}>{headline}:</h3>
         <input
           type="number"
@@ -204,7 +221,7 @@ const Input = (props: InputProps) => {
           min={min}
           max={max}
           value={value ?? 0}
-          className="bg-[#EDEDED] border-[1px] border-solid border-black rounded-sm pl-2"
+          className="pl-2 border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg"
         />
       </div>
     );
