@@ -25,7 +25,7 @@ export default function RootLayout({
   const theme = cookies().get("theme")?.value;
   return (
     <html lang="en" className={`${GeistSans.className} ${theme}`}>
-      <body className="bg-light-bg dark:bg-dark-bg">
+      <body className="bg-light-bg dark:bg-dark-bg transition-all duration-500">
         <Toast />
         <NavBar />
         <main>{children}</main>

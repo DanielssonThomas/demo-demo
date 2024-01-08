@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import LogOutButton from "./buttons/LogoutButton";
 import PrimaryLink from "./links/PrimaryLink";
+import SetTheme from "./SetTheme";
+import PrimaryButton from "./buttons/PrimaryButton";
 
 const NavBar = () => {
   const [userRole, setUserRole] = useState();
@@ -51,6 +53,9 @@ const NavBar = () => {
       {userRole == "admin" && (
         <PrimaryLink type="default" href={"/admin"} linkText="Admin page" />
       )}
+      <form action={SetTheme}>
+        <PrimaryButton type="default" buttonText="Switch theme" />
+      </form>
       <LogOutButton className={"ml-auto"} />
     </nav>
   ) : (
