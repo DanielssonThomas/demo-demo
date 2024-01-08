@@ -12,8 +12,10 @@ const EventList = () => {
   const [eventInfoStyling, setEventInfoStyling] = useState("hidden");
   const [eventDemonstrators, setEventDemonstrators] = useState({
     eventId: "",
-    demonstrator: "",
+    demonstrator_id: "",
+    demonstrator_name: "",
   });
+  const [eventDemonstrator, setEventDemonstrator] = useState("");
   const [userInfo, setUserInfo] = useState({
     id: "",
     name: "",
@@ -33,6 +35,11 @@ const EventList = () => {
     const info = await res.data;
 
     setAllEventsInfo(info);
+
+    /* setSignInFormValue((signInFormValueSate) => ({
+      ...signInFormValueSate,
+      [name]: value,
+    })); */
   };
 
   const getEventDemonstrator = async (demonstratorId: number | null) => {
@@ -107,26 +114,24 @@ const EventList = () => {
   };
 
   return (
-    <div>
+    <div className="w-full relative flex justify-center">
       <table className="w-full text-black absolute z-0">
         <thead>
           <tr>
             <th>Client</th>
             <th>Location</th>
-            <th>Address</th>
             <th>Date</th>
             <th>Time</th>
             <th>Demonstrator</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="bg-white rounded shadow-md">
           {allEventsInfo?.map((event) => (
             <EventListItem
-              className="h-[3rem] border-[1px] border-solid rounded-sm border-black transition-all duration-300 hover:scale-[1.02] hover:p-4 cursor-pointer"
+              className="h-[3rem] border-[1px] transition-all duration-300 hover:scale-[1.02] hover:p-4 cursor-pointer"
               id={`${event.id}`}
               client={event.client}
               location={event.Location.name}
-              address={event.Location.address}
               supplier={event.supplier}
               date={event.date}
               startTime={event.start_time == null ? event.start_time : event.start_time.slice(0, 5)}
@@ -139,11 +144,12 @@ const EventList = () => {
         </tbody>
       </table>
       <div
-        className={`bg-red-500 absolute z-10 border-[1px] border-solid rounded-sm border-black transition-all duration-300 left-[30%] top-[20%] ${eventInfoStyling}`}
+        className={`bg-[#EDEDED] absolute z-10 border-[1px] transition-all duration-300 rounded shadow-md ${eventInfoStyling}`}
       >
         <div>
           {eventInfo?.id != null && (
             <EventInfoCard
+              className={"flex flex-col gap-2"}
               client={eventInfo.client}
               location={eventInfo.Location.name}
               address={eventInfo.Location.address}
@@ -159,23 +165,25 @@ const EventList = () => {
               }
               demonstrator={`${eventInfo.demonstrator_id}`}
               product={eventInfo.product_name}
-              productStock={eventInfo.product_stock}
-              unitsUsed={eventInfo.units_used}
             />
           )}
-          <CloseButton
-            onClick={() => {
-              setEventInfo(null);
-              setEventInfoStyling("hidden");
-            }}
-          />
-          {/* the real one, other is used for testing 
+
+          <div className="flex pb-6 justify-around align-center">
+            {/* the real one, other is used for testing 
         {eventInfo?.demonstrator == null && userInfo.role == "demonstrator" && (
           <SignupButton onClick={SignUpDemonstrator} />
         )} */}
-          {eventInfo?.demonstrator_id == null && userInfo.role == "admin" && (
-            <SignupButton onClick={SignUpDemonstrator} />
-          )}
+            {eventInfo?.demonstrator_id == null && userInfo.role == "admin" && (
+              <SignupButton onClick={SignUpDemonstrator} className="" />
+            )}
+
+            <CloseButton
+              onClick={() => {
+                setEventInfo(null);
+                setEventInfoStyling("hidden");
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>

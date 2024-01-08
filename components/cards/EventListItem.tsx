@@ -5,7 +5,6 @@ const EventListItem = ({
   id,
   client,
   location,
-  address,
   date,
   startTime,
   endTime,
@@ -16,7 +15,6 @@ const EventListItem = ({
   id: string;
   client: string | null;
   location: string | null;
-  address: string | null;
   supplier: string | null;
   date: string | null;
   startTime: string | null;
@@ -28,7 +26,6 @@ const EventListItem = ({
     <tr className={`${className}`} onClick={onClick} id={id}>
       <th>{client}</th>
       <th>{location}</th>
-      <th>{address}</th>
       <th>{date}</th>
       <th>{`${startTime} - ${endTime}`}</th>
       <th>{demonstrator}</th>
