@@ -1,4 +1,5 @@
 import { FormEvent, useEffect, useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import { DeleteEvent } from "../delete-event";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 import Input from "@/components/global/FormComponents/Input";
@@ -44,6 +45,8 @@ export const Event = ({
   setDeleteEventActive,
   setRefresh,
 }: EventProps) => {
+  const router = useRouter();
+  const pathname = usePathname();
   const [loaded, setLoaded] = useState<boolean>(false);
   const [formAddress, setFormAddress] = useState<string | null>(
     Location.address
@@ -87,6 +90,7 @@ export const Event = ({
       body: e,
     });
     const res = await data.json();
+    router.push(pathname + `?` + "e=" + res.error);
     setRefresh(true);
   };
 
@@ -114,6 +118,7 @@ export const Event = ({
         </label>
         <select
           name="location_id"
+          value={selectedFormLocationId ?? 0}
           className="border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg"
           onChange={(e) => {
             setSelectedFormLocationId(parseInt(e.target.value));

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { DeleteLocation } from "../delete-location";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 import Input from "@/components/global/FormComponents/Input";
@@ -26,6 +26,7 @@ export const Location = ({
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const router = useRouter();
+  const pathname = usePathname();
   const updateLocation = async (e: FormData) => {
     const data = await fetch("/api/post/update-location", {
       method: "POST",
@@ -33,6 +34,7 @@ export const Location = ({
     });
     const res = await data.json();
     if (res.message === null) router.refresh();
+    router.push(pathname + `?` + "e=" + res.error);
     setErrorMessage(res.message);
   };
 

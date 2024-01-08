@@ -38,7 +38,7 @@ const Toast = () => {
           isError ? "bg-red-500" : "bg-green-500"
         } h-[5vh] w-[20vw] rounded-md left-[40vw]`}
       >
-        <h2 className="flex flex-col justify-center items-center h-[5vh]">
+        <h2 className="flex flex-col justify-center items-center h-[5vh] text-white">
           {isError ? "Error" : "Success"}
         </h2>
         <p

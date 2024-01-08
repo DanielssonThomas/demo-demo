@@ -1,6 +1,9 @@
 import LoadingAnim from "@/components/global/LoadingAnim";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 import Input from "@/components/global/FormComponents/Input";
+import { useRouter, usePathname } from "next/navigation";
+import { TriggerToast } from "@/components/global/TriggerToast";
+
 import { useEffect, useState } from "react";
 
 export const User = ({ id }: { id: number }) => {
@@ -8,7 +11,8 @@ export const User = ({ id }: { id: number }) => {
   const [name, setName] = useState<string | null>(null);
   const [verified, setVerified] = useState<boolean>(false);
   const [role, setRole] = useState<string | null>(null);
-
+  const router = useRouter();
+  const pathname = usePathname();
   const getUser = async () => {
     const data = await fetch("/api/post/get-user", {
       method: "POST",
@@ -32,7 +36,8 @@ export const User = ({ id }: { id: number }) => {
       body: e,
     });
     const res = await data.json();
-    console.log(res);
+
+    router.push(pathname + `?` + "e=" + res.error);
     getUser();
   };
 
@@ -50,7 +55,7 @@ export const User = ({ id }: { id: number }) => {
         <Input
           type="text"
           headline="Name"
-          name="Name"
+          name="name"
           value={name ?? ""}
           wrapperClass="flex-col"
           onChange={(e) => setName(e.target.value)}
