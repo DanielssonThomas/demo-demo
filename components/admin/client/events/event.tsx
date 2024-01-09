@@ -97,7 +97,7 @@ export const Event = ({
   return (
     <form
       action={(e) => updateEvent(e)}
-      className="m-2 p-4 text-sm relative border-[1px] border-solid border-black dark:border-white rounded-md"
+      className="flex flex-col justify-between m-2 p-4 text-sm relative border-[1px] border-solid border-black dark:border-white rounded-md h-[45vh]"
     >
       {deleteEventActive && (
         <DeleteEvent

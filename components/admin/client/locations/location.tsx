@@ -41,7 +41,7 @@ export const Location = ({
   return (
     <form
       action={(e: FormData) => updateLocation(e)}
-      className="flex flex-col gap-2 m-2 p-4 text-black border-[1px] border-solid border-black dark:border-white rounded-md relative h-[25vh]"
+      className="flex flex-col gap-2 m-2 p-4 text-black border-[1px] border-solid border-black dark:border-white rounded-md relative h-[30vh]"
     >
       {deleteLocationActive && (
         <DeleteLocation
@@ -60,22 +60,26 @@ export const Location = ({
         X
       </button>
       <input type="hidden" name="id" value={id} />
-      <Input
-        type="text"
-        headline="Name"
-        name="name"
-        value={name ?? ""}
-        onChange={(e) => setName(e.target.value)}
-        wrapperClass="flex-col"
-      />
-      <Input
-        type="text"
-        headline="Address"
-        name="address"
-        value={address ?? ""}
-        onChange={(e) => setAddress(e.target.value)}
-        wrapperClass="flex-col"
-      />
+      <div>
+        <Input
+          type="text"
+          headline="Name"
+          name="name"
+          value={name ?? ""}
+          onChange={(e) => setName(e.target.value)}
+          wrapperClass="flex-col"
+        />
+      </div>
+      <div>
+        <Input
+          type="text"
+          headline="Address"
+          name="address"
+          value={address ?? ""}
+          onChange={(e) => setAddress(e.target.value)}
+          wrapperClass="flex-col"
+        />
+      </div>
       <PrimaryButton
         type="green"
         buttonText="save changes"
