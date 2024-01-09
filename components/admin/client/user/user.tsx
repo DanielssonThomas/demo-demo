@@ -2,7 +2,6 @@ import LoadingAnim from "@/components/global/LoadingAnim";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 import Input from "@/components/global/FormComponents/Input";
 import { useRouter, usePathname } from "next/navigation";
-import { TriggerToast } from "@/components/global/TriggerToast";
 
 import { useEffect, useState } from "react";
 
