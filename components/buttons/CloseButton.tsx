@@ -1,4 +1,4 @@
-import PrimaryButton from "./PrimaryButton";
+import SecondaryButton from "./SecondaryButton";
 
 const CloseButton = ({
   className,
@@ -7,14 +7,8 @@ const CloseButton = ({
   className?: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }) => {
-  return (
-    <PrimaryButton
-      type="red"
-      className={className}
-      buttonText="Close"
-      onClick={onClick}
-    />
-  );
+  return <SecondaryButton className={className} buttonText="Close" onClick={onClick} />;
+
 };
 
 export default CloseButton;

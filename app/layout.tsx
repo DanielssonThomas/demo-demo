@@ -1,4 +1,4 @@
-import { GeistSans } from "geist/font/sans";
+import {GeistSans} from "geist/font/sans";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
@@ -23,13 +23,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const theme = cookies().get("theme")?.value;
+
   return (
     <html lang="en" className={`${GeistSans.className} ${theme}`}>
       <body className="bg-light-bg dark:bg-dark-bg transition-all duration-500">
         <Toast />
         <NavBar />
         <main>{children}</main>
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   );
