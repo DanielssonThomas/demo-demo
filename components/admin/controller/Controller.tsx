@@ -21,7 +21,7 @@ export const Controller = ({ type, data }: ControllerProps) => {
   const [sortDate, setSortDate] = useState<"latest" | "oldest">("latest");
 
   return (
-    <div className="text-black m-8">
+    <div className="text-black m-8 flex flex-col gap-6">
       <Filter
         type={type}
         setShowVerified={setShowVerified}

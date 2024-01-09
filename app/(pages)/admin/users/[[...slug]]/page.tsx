@@ -47,7 +47,7 @@ const Users = ({ params: { slug } }: { params: { slug: string[] } }) => {
   }
 
   return (
-    <section className="w-full min-h-screen bg-[#EDEDED]">
+    <section className="mt-6 w-full min-h-screen bg-light-bg dark:bg-dark-bg">
       <Controller type="users" data={users} />
       {user !== null ? (
         <UserDetails

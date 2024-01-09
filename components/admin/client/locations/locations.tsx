@@ -32,7 +32,7 @@ export const Locations = ({ id }: { id: number }) => {
   }
 
   return (
-    <div className="w-[25vw] border-x-[1px] border-solid border-black h-screen overflow-scroll">
+    <div className="w-[25vw] border-x-[1px] border-solid border-black dark:border-white h-screen overflow-scroll">
       {createLocationActive && (
         <CreateLocation
           client_id={id}
@@ -51,11 +51,11 @@ export const Locations = ({ id }: { id: number }) => {
         />
       ))}
       <section
-        className="flex flex-col justify-center items-center relative m-2 p-4 text-black border-[1px] border-solid border-black rounded-md h-[15vh] cursor-pointer"
+        className="flex flex-col justify-center items-center relative m-2 p-4 text-black border-[1px] border-solid border-black dark:border-white rounded-md h-[15vh] cursor-pointer"
         onClick={() => setCreateLocationActive(!createLocationActive)}
       >
-        <div className="absolute w-[3rem] h-[1px] bg-black" />
-        <div className="absolute w-[1px] h-[3rem] bg-black" />
+        <div className="absolute w-[3rem] h-[1px] bg-black dark:bg-white" />
+        <div className="absolute w-[1px] h-[3rem] bg-black dark:bg-white" />
       </section>
     </div>
   );

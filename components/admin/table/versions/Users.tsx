@@ -28,7 +28,7 @@ export const UsersTable = ({ Users, showVerified }: UsersTableProps) => {
         ));
 
   return (
-    <table className="w-full text-black">
+    <table className="w-full text-black dark:text-white">
       <tr>
         <th>Name</th>
         <th>Role</th>

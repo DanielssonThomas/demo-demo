@@ -66,7 +66,7 @@ export const EventsTable = ({
         ));
 
   return (
-    <table className="w-full text-black">
+    <table className="w-full text-black dark:text-light-text">
       <thead>
         <tr>
           <th>Client</th>
