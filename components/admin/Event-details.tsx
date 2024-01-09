@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Input from "../global/FormComponents/Input";
-import { useRouter, usePathname, redirect } from "next/navigation";
+import { useRouter, redirect, usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import PrimaryButton from "../buttons/PrimaryButton";
 
@@ -42,7 +42,6 @@ const EventDetails = ({
   active,
 }: EventDetailsProps) => {
   const router = useRouter();
-  const pathname = usePathname();
   const [locations, setLocations] = useState<DBLocation[] | null>(null);
   const [formAddress, setFormAddress] = useState<string | null>(address);
 
@@ -73,7 +72,8 @@ const EventDetails = ({
       method: "POST",
       body: e,
     });
-    redirect("/admin/events");
+    const res = await data.json();
+    redirect(`/admin/events?e=${res.error}`);
   };
 
   return (

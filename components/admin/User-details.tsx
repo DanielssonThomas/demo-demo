@@ -1,5 +1,4 @@
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { useRouter, redirect } from "next/navigation";
 import PrimaryLink from "../links/PrimaryLink";
 import PrimaryButton from "../buttons/PrimaryButton";
 type UserDetailsProps = {
@@ -11,6 +10,7 @@ type UserDetailsProps = {
 
 const UserDetails = ({ id, name, role, verified }: UserDetailsProps) => {
   const router = useRouter();
+
   const verifyUser = async () => {
     const data = await fetch("/api/post/set-user-verification", {
       method: "POST",
@@ -18,8 +18,9 @@ const UserDetails = ({ id, name, role, verified }: UserDetailsProps) => {
     });
     const res = await data.json();
     console.log(res);
-    router.back();
+    redirect(`/admin/users?e=${res.error}`);
   };
+
   return (
     <div className="absolute">
       <div
