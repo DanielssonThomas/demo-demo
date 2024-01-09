@@ -38,7 +38,7 @@ const UserSetup = () => {
           <div>
             <h3 className="text-sm">Select role:</h3>
             <select
-              className="text-black w-full border-black border-solid border-[1px]"
+              className="border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg"
               name="role"
             >
               <option value="client">Client</option>

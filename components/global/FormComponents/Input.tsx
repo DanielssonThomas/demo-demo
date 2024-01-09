@@ -3,7 +3,7 @@ type InputCheckBoxProps = {
   isChecked: boolean;
   name: string;
   headline: string;
-  onClick: React.MouseEventHandler<HTMLInputElement>;
+  onClick?: React.MouseEventHandler<HTMLInputElement>;
   wrapperClass?: string;
   headlineClass?: string;
 };
@@ -93,7 +93,7 @@ const Input = (props: InputProps) => {
     } = props;
     return (
       <div
-        className={`flex justify-between w-full text-black dark:text-white ${wrapperClass}`}
+        className={`flex justify-between w-full gap-4 text-black dark:text-white ${wrapperClass}`}
       >
         <h3 className={`font-bold ${headlineClass}`}>{headline}:</h3>
         <input

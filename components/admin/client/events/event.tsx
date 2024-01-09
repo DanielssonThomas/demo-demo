@@ -100,7 +100,11 @@ export const Event = ({
       className="m-2 p-4 text-sm relative border-[1px] border-solid border-black dark:border-white rounded-md"
     >
       {deleteEventActive && (
-        <DeleteEvent key={id} id={id} setPopUpActive={setDeleteEventActive} />
+        <DeleteEvent
+          key={id}
+          id={id}
+          setDeleteEventActive={setDeleteEventActive}
+        />
       )}
       <button
         onClick={(e: any) => {

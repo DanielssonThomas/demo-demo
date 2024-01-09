@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import PrimaryButton from "@/components/buttons/PrimaryButton";
+import Input from "@/components/global/FormComponents/Input";
 
 type CreateLocation = {
   client_id: number;
@@ -13,7 +15,7 @@ export const CreateLocation = ({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [clientName, setClientName] = useState<string>("");
   const router = useRouter();
-
+  const pathname = usePathname();
   const getClientName = async () => {
     const data = await fetch("/api/post/get-user", {
       method: "POST",
@@ -30,7 +32,7 @@ export const CreateLocation = ({
     });
     const res = await data.json();
     setPopUpActive(false);
-    if (res.error === null) router.refresh();
+    if (res.error === null) router.push(pathname + "?e=" + res.error);
     setErrorMessage(res.message);
   };
 
@@ -41,39 +43,23 @@ export const CreateLocation = ({
   return (
     <div className="absolute">
       <div
-        className="fixed w-[100vw] h-[100vh] top-0 left-0 bg-white opacity-50 z-20"
+        className="fixed w-[100vw] h-[100vh] top-0 left-0 bg-white dark:bg-black opacity-50 z-20"
         onClick={() => setPopUpActive(false)}
       />
-      <section className="fixed top-[25vh] right-[37.5vw] left-[37.5vw] bottom-0 w-1/4 h-2/5 border-[1px] border-solid border-black rounded-md bg-[#EDEDED] text-black p-4 z-40">
+      <section className="fixed top-[25vh] right-[37.5vw] left-[37.5vw] bottom-0 w-1/4 h-2/5 border-[1px] border-solid border-black rounded-md bg-light-bg dark:bg-dark-bg text-black dark:text-white p-4 z-40">
         <div className="flex flex-col justify-center items-center gap-4">
-          <h2 className="text-2xl">Create location for client</h2>
           <form
             action={createLocation}
-            className="flex flex-col w-full items-center gap-4"
+            className="flex flex-col w-full justify-between items-center gap-4 h-[16rem]"
           >
+            <h2 className="text-2xl">Create location for client</h2>
             <input type="hidden" name="client_name" value={clientName} />
-            <div>
+            <div className="flex flex-col gap-4">
               <input type="hidden" name="client_id" value={client_id} />
-              <h3>Name:</h3>
-              <input
-                type="text"
-                name="name"
-                className="px-2 py-1 border-[1px] border-solid border-black rounded-sm bg-[#EDEDED]"
-                required
-              />
+              <Input type="text" headline="Name" name="name" value="" />
+              <Input type="text" headline="Address" name="address" value="" />
             </div>
-            <div>
-              <h3>Address:</h3>
-              <input
-                type="text"
-                name="address"
-                className="px-2 py-1 border-[1px] border-solid border-black rounded-sm bg-[#EDEDED]"
-                required
-              />
-            </div>
-            <button className="bg-[#dbdbdb] border-[1px] border-black border-solid rounded-md px-4 py-2">
-              Create location
-            </button>
+            <PrimaryButton type="green" buttonText="Create location" />
           </form>
         </div>
         {errorMessage === null ? (

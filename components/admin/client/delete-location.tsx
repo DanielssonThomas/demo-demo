@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import PrimaryButton from "@/components/buttons/PrimaryButton";
 
 type DeleteLocation = {
   id: number;
@@ -26,22 +27,21 @@ export const DeleteLocation = ({
   return (
     <div className="absolute">
       <div
-        className="fixed w-[100vw] h-[100vh] top-0 left-0 bg-white opacity-50 z-20"
+        className="fixed w-[100vw] h-[100vh] top-0 left-0 bg-white dark:bg-black opacity-50 z-20"
         onClick={() => setDeleteLocationActive(false)}
       />
-      <section className="fixed top-[37.5vh] right-[37.5vw] left-[37.5vw] bottom-0 w-1/4 h-1/4 border-[1px] border-solid border-black rounded-md bg-[#EDEDED] text-black p-4 z-40">
+      <section className="fixed top-[37.5vh] right-[37.5vw] left-[37.5vw] bottom-0 w-1/4 h-1/4 border-[1px] border-solid border-black rounded-md bg-light-bg dark:bg-dark-bg p-4 z-40 text-black dark:text-white">
         <div className="flex flex-col justify-center items-center gap-8">
           <h2 className="text-2xl">Delete location?</h2>
           <i>This will remove location permanentaly</i>
-          <button
+          <PrimaryButton
+            type="red"
+            buttonText="DELETE"
             onClick={(e: any) => {
               e.preventDefault();
               deleteLocation(id);
             }}
-            className="bg-[#dbdbdb] border-[1px] border-black border-solid rounded-md px-4 py-2"
-          >
-            DELETE
-          </button>
+          />
           {errorMessage === null ? (
             <></>
           ) : (

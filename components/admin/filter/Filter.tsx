@@ -34,7 +34,7 @@ export const Filter = ({ type, setShowVerified, setSortDate }: FilterProps) => {
           <div className="flex flex-col items-center">
             <h3>Sort by</h3>
             <select
-              className="border-solid border-[0.1px] rounded-sm dark:border-white dark:bg-dark-bg"
+              className="border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg"
               onChange={(e) =>
                 setSortDate(e.target.value as "latest" | "oldest")
               }
