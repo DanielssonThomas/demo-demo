@@ -2,6 +2,7 @@ import Link from "next/link";
 import {headers, cookies} from "next/headers";
 import {createClient} from "@/utils/supabase/server";
 import {redirect} from "next/navigation";
+import PrimaryButton from "@/components/buttons/PrimaryButton";
 
 export default function Login({searchParams}: {searchParams: {message: string}}) {
   const signIn = async (formData: FormData) => {
@@ -74,13 +75,8 @@ export default function Login({searchParams}: {searchParams: {message: string}})
             placeholder="••••••••"
             required
           />
-          <button className="bg-green-700 rounded-md px-4 py-2 text-foreground mb-2">
-            Sign In
-          </button>
-          <button
-            formAction={signUp}
-            className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
-          >
+          <button className="bg-indigo-500 px-4 py-2 rounded-full text-white">Sign In</button>
+          <button formAction={signUp} className="bg-red-500 px-4 py-2 rounded-full text-white">
             Sign Up
           </button>
           {searchParams?.message && (
