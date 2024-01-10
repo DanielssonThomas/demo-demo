@@ -23,33 +23,42 @@ const EventInfoCard = ({
 }) => {
   return (
     <div className={`p-6 ${className}`}>
-      <p>
-        <b>Client:</b> {client}
-      </p>
-      <p>
-        <b>Location:</b> {location}
-      </p>
-      <p>
-        <b>Address:</b> {address}
-      </p>
-      <p>
-        <b>Date:</b> {date}
-      </p>
-      <p>
-        <b>Starts:</b> {startTime}
-      </p>
-      <p>
-        <b>Ends:</b> {endTime}
-      </p>
-      <p>
-        <b>Demonstrator:</b> {demonstrator}
-      </p>
-      <p>
-        <b>Product:</b> {product}
-      </p>
-      <p>
-        <b>Supplier:</b> {suplier}
-      </p>
+      <div>
+        <p>Client:</p>
+        <p>{client}</p>
+      </div>
+      <div>
+        <p>Location:</p>
+        <p>{location}</p>
+      </div>
+      <div>
+        <p>Address:</p>
+        <p>{address}</p>
+      </div>
+      <div>
+        <p>Date:</p>
+        <p>{date}</p>
+      </div>
+      <div>
+        <p>Starts:</p>
+        <p>{startTime}</p>
+      </div>
+      <div>
+        <p>Ends:</p>
+        <p>{endTime}</p>
+      </div>
+      <div>
+        <p>Demonstrator:</p>
+        <p>{demonstrator}</p>
+      </div>
+      <div>
+        <p>Product:</p>
+        <p>{product}</p>
+      </div>
+      <div>
+        <p>Supplier:</p>
+        <p>{suplier}</p>
+      </div>
     </div>
   );
 };

@@ -114,41 +114,44 @@ const EventList = () => {
   };
 
   return (
-    <div className="w-full relative flex justify-center">
-      <table className="w-full text-black dark:text-light-text absolute z-0">
-        <thead>
-          <tr>
-            <th>Client</th>
-            <th>Location</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Demonstrator</th>
-          </tr>
-        </thead>
-        <tbody>
-          {allEventsInfo?.map((event) => (
-            <EventListItem
-              id={`${event.id}`}
-              client={event.client ?? "-"}
-              location={event.Location.name ?? "-"}
-              supplier={event.supplier ?? "-"}
-              date={event.date ?? "-"}
-              startTime={event.start_time == null ? event.start_time : event.start_time.slice(0, 5)}
-              endTime={event.end_time == null ? event.end_time : event.end_time.slice(0, 5)}
-              demonstrator={event.demonstrator_id == null ? false : true}
-              key={event.id}
-              onClick={getClickedEvent}
-            />
-          ))}
-        </tbody>
-      </table>
-      <div
-        className={`bg-[#EDEDED] absolute z-10 border-[1px] transition-all duration-300 rounded shadow-md ${eventInfoStyling}`}
-      >
-        <div>
+    <section className="mt-6 w-full min-h-screen bg-light-bg dark:bg-dark-bg">
+      <div className="text-black m-8 flex flex-col gap-6">
+        <table className="w-full text-black dark:text-light-text">
+          <thead>
+            <tr>
+              <th>Client</th>
+              <th>Location</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Demonstrator</th>
+            </tr>
+          </thead>
+          <tbody>
+            {allEventsInfo?.map((event) => (
+              <EventListItem
+                id={`${event.id}`}
+                client={event.client ?? "-"}
+                location={event.Location.name ?? "-"}
+                supplier={event.supplier ?? "-"}
+                date={event.date ?? "-"}
+                startTime={
+                  event.start_time == null ? event.start_time : event.start_time.slice(0, 5)
+                }
+                endTime={event.end_time == null ? event.end_time : event.end_time.slice(0, 5)}
+                demonstrator={event.demonstrator_id == null ? false : true}
+                key={event.id}
+                onClick={getClickedEvent}
+              />
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className={`absolute ${eventInfoStyling}`}>
+        <div className="fixed w-[100vw] h-[100vh] top-0 left-0 bg-white dark:bg-black opacity-50 z-20"></div>
+        <section className="fixed top-[12.5vh] right-[25vw] left-[25vw] bottom-0 w-1/2 h-3/4 border-[1px] border-solid border-black rounded-md bg-bg-light text-black dark:text-white p-4 z-40 bg-light-bg dark:bg-dark-bg">
           {eventInfo?.id != null && (
             <EventInfoCard
-              className={"flex flex-col gap-2"}
+              className={""}
               client={eventInfo.client}
               location={eventInfo.Location.name}
               address={eventInfo.Location.address}
@@ -167,11 +170,7 @@ const EventList = () => {
             />
           )}
 
-          <div className="flex pb-6 justify-around align-center">
-            {/* the real one, other is used for testing 
-        {eventInfo?.demonstrator == null && userInfo.role == "demonstrator" && (
-          <SignupButton onClick={SignUpDemonstrator} />
-        )} */}
+          <div>
             {eventInfo?.demonstrator_id == null && userInfo.role == "admin" && (
               <SignupButton onClick={SignUpDemonstrator} className="" />
             )}
@@ -183,9 +182,9 @@ const EventList = () => {
               }}
             />
           </div>
-        </div>
+        </section>
       </div>
-    </div>
+    </section>
   );
 };
 
