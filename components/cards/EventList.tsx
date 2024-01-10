@@ -115,7 +115,7 @@ const EventList = () => {
 
   return (
     <div className="w-full relative flex justify-center">
-      <table className="w-full text-black absolute z-0">
+      <table className="w-full text-black dark:text-light-text absolute z-0">
         <thead>
           <tr>
             <th>Client</th>
@@ -125,18 +125,17 @@ const EventList = () => {
             <th>Demonstrator</th>
           </tr>
         </thead>
-        <tbody className="bg-white rounded shadow-md">
+        <tbody>
           {allEventsInfo?.map((event) => (
             <EventListItem
-              className="h-[3rem] border-[1px] transition-all duration-300 hover:scale-[1.02] hover:p-4 cursor-pointer"
               id={`${event.id}`}
-              client={event.client}
-              location={event.Location.name}
-              supplier={event.supplier}
-              date={event.date}
+              client={event.client ?? "-"}
+              location={event.Location.name ?? "-"}
+              supplier={event.supplier ?? "-"}
+              date={event.date ?? "-"}
               startTime={event.start_time == null ? event.start_time : event.start_time.slice(0, 5)}
               endTime={event.end_time == null ? event.end_time : event.end_time.slice(0, 5)}
-              demonstrator={`${event.demonstrator_id}`}
+              demonstrator={event.demonstrator_id == null ? false : true}
               key={event.id}
               onClick={getClickedEvent}
             />
@@ -163,7 +162,7 @@ const EventList = () => {
               endTime={
                 eventInfo.end_time == null ? eventInfo.end_time : eventInfo.end_time.slice(0, 5)
               }
-              demonstrator={`${eventInfo.demonstrator_id}`}
+              demonstrator={eventInfo.demonstrator_id == null ? "false" : "true"}
               product={eventInfo.product_name}
             />
           )}
