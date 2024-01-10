@@ -10,15 +10,19 @@ type ClientProps = {
 export const Client = ({ id }: ClientProps) => {
   return (
     <div className="flex flex-col p-4 bg-light-bg dark:bg-dark-bg text-black dark:text-white min-h-screen">
-      <div className="flex w-full h-[5vh]">
-        <h2 className="text-center w-[25vw]">Client</h2>
-        <h2 className="text-center w-[25vw]">Locations</h2>
-        <h2 className="text-center w-[50vw]">Events</h2>
-      </div>
-      <div className="flex min-h-screen">
-        <User id={id} />
-        <Locations id={id} />
-        <Events id={id} />
+      <div className="flex flex-col justify-center items-center xl:items-start min-h-screen xl:flex-row">
+        <section className="w-full sm:w-[60vw] md:w-[50vw] xl:w-[25vw]">
+          <h2 className="text-center">Client</h2>
+          <User id={id} />
+        </section>
+        <section className="w-full sm:w-[60vw] md:w-[50vw] xl:w-[25vw] h-full">
+          <h2 className="text-center">Locations</h2>
+          <Locations id={id} />
+        </section>
+        <section className="w-full sm:w-[60vw] md:w-[50vw] xl:w-[50vw]">
+          <h2 className="text-center">Events</h2>
+          <Events id={id} />
+        </section>
       </div>
     </div>
   );

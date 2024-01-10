@@ -32,7 +32,7 @@ export const Locations = ({ id }: { id: number }) => {
   }
 
   return (
-    <div className="w-[25vw] border-x-[1px] border-solid border-black dark:border-white h-screen overflow-scroll">
+    <div className="w-full xl:border-x-[1px] border-solid border-black dark:border-white h-full xl:overflow-scroll">
       {createLocationActive && (
         <CreateLocation
           client_id={id}

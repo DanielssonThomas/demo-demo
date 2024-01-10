@@ -8,7 +8,12 @@ const UnregisterButton = ({
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }) => {
   return (
-    <PrimaryButton className={className} buttonText="Unregister from event" onClick={onClick} />
+    <PrimaryButton
+      type="red"
+      className={className}
+      buttonText="Unregister from event"
+      onClick={onClick}
+    />
   );
 };
 

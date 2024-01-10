@@ -45,10 +45,7 @@ export const User = ({ id }: { id: number }) => {
   }
 
   return (
-    <form
-      action={updateUser}
-      className="w-[25vw] p-2 text-black dark:text-white"
-    >
+    <form action={updateUser} className="w-full p-2 text-black dark:text-white">
       <input type="hidden" name="id" value={id} />
       <section className="flex flex-col gap-4 p-2 text-sm relative border-[1px] border-solid border-black dark:border-white rounded-md h-[25vh]">
         <Input

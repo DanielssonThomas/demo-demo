@@ -97,7 +97,7 @@ export const Event = ({
   return (
     <form
       action={(e) => updateEvent(e)}
-      className="flex flex-col justify-between m-2 p-4 text-sm relative border-[1px] border-solid border-black dark:border-white rounded-md h-[45vh]"
+      className="flex flex-col justify-between m-2 p-4 text-sm relative border-[1px] border-solid border-black dark:border-white rounded-md h-[70vh] xl:h-[60vh]"
     >
       {deleteEventActive && (
         <DeleteEvent
@@ -123,7 +123,7 @@ export const Event = ({
         <select
           name="location_id"
           value={selectedFormLocationId ?? 0}
-          className="border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg"
+          className="px-2 border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg"
           onChange={(e) => {
             setSelectedFormLocationId(parseInt(e.target.value));
           }}
@@ -138,11 +138,11 @@ export const Event = ({
       <div className="w-[20vw]">
         <Input type="readOnly" headline="Address" value={formAddress} />
       </div>
-      <section className="flex gap-2 ">
-        <div className="flex flex-col justify-center items-center w-[15vw]">
+      <section className="flex flex-col gap-2 xl:flex-row">
+        <div className="flex flex-col">
           <Input type="date" headline="Date" name="date" value={date ?? ""} />
         </div>
-        <div className="flex flex-col justify-center items-center w-[15vw]">
+        <div className="flex flex-col">
           <Input
             type="time"
             headline="Start time"
@@ -153,7 +153,7 @@ export const Event = ({
             }}
           />
         </div>
-        <div className="flex flex-col justify-center items-center w-[15vw]">
+        <div className="flex flex-col">
           <Input
             type="time"
             headline="End time"
@@ -169,7 +169,7 @@ export const Event = ({
         <Input type="readOnly" headline="Product name" value={product_name} />
         <Input type="readOnly" headline="Supplier" value={supplier} />
       </div>
-      <section className="flex gap-2 w-[18vw]">
+      <section className="flex gap-2 flex-wrap w-[20vw]">
         <Input type="readOnly" headline="Stock" value={product_stock} />
         <Input
           type="number"

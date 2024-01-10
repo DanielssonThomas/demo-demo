@@ -93,7 +93,7 @@ const Input = (props: InputProps) => {
     } = props;
     return (
       <div
-        className={`flex justify-between w-full gap-4 text-black dark:text-white ${wrapperClass}`}
+        className={`flex justify-between flex-wrap w-full text-black dark:text-white ${wrapperClass}`}
       >
         <h3 className={`font-bold ${headlineClass}`}>{headline}:</h3>
         <input
@@ -128,7 +128,7 @@ const Input = (props: InputProps) => {
     const { headline, value, wrapperClass, headlineClass, inputClass } = props;
     return (
       <div
-        className={`flex justify-between w-full text-black dark:text-white ${wrapperClass}`}
+        className={`flex justify-between flex-wrap w-[8rem] text-black dark:text-white ${wrapperClass}`}
       >
         <h3 className={`font-bold ${headlineClass}`}>{headline}:</h3>
         <p
@@ -170,14 +170,14 @@ const Input = (props: InputProps) => {
     } = props;
     return (
       <div
-        className={`flex justify-between w-full text-black dark:text-white ${wrapperClass}`}
+        className={`flex w-[11rem] justify-between  text-black dark:text-white ${wrapperClass}`}
       >
         <h3 className={`font-bold ${headlineClass}`}>{headline}:</h3>
         <input
           name={name}
           type="date"
           value={value}
-          className={`border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg ${inputClass}`}
+          className={`w-[8rem] px-2 border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg ${inputClass}`}
           onChange={onChange}
         />
       </div>
@@ -197,14 +197,14 @@ const Input = (props: InputProps) => {
 
     return (
       <div
-        className={`flex justify-between w-full text-black dark:text-white ${wrapperClass}`}
+        className={`flex justify-between w-[13rem] text-black dark:text-white ${wrapperClass}`}
       >
         <h3 className={`font-bold ${headlineClass}`}>{headline}:</h3>
         <input
           name={name}
           type="time"
           value={value}
-          className={`border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg ${inputClass}`}
+          className={`w-[8rem] px-2 border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg ${inputClass}`}
           onChange={onChange}
         />
       </div>
@@ -224,7 +224,7 @@ const Input = (props: InputProps) => {
     } = props;
     return (
       <div
-        className={`flex justify-between w-full text-black dark:text-white ${wrapperClass}`}
+        className={`flex justify-between flex-wrap w-[8rem] text-black dark:text-white ${wrapperClass}`}
       >
         <h3 className={`font-bold ${headlineClass}`}>{headline}:</h3>
         <input
