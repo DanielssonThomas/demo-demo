@@ -10,11 +10,6 @@ const EventList = () => {
   const [allEventsInfo, setAllEventsInfo] = useState<TableClientEvent[] | null>(null);
   const [eventInfo, setEventInfo] = useState<TableClientEvent | null>(null);
   const [eventInfoStyling, setEventInfoStyling] = useState("hidden");
-  const [eventDemonstrators, setEventDemonstrators] = useState({
-    eventId: "",
-    demonstrator_id: "",
-    demonstrator_name: "",
-  });
   const [eventDemonstrator, setEventDemonstrator] = useState("");
   const [userInfo, setUserInfo] = useState({
     id: "",
@@ -35,29 +30,24 @@ const EventList = () => {
     const info = await res.data;
 
     setAllEventsInfo(info);
-
-    /* setSignInFormValue((signInFormValueSate) => ({
-      ...signInFormValueSate,
-      [name]: value,
-    })); */
   };
 
-  const getEventDemonstrator = async (demonstratorId: number | null) => {
-    if (demonstratorId == null) {
-      console.log("no demonstrator");
-      return "";
+  const getDemonstrator = async (demonstratorId: number) => {
+    try {
+      const data = await fetch("/api/post/get-demonstrator-info", {
+        method: "POST",
+        body: JSON.stringify({id: demonstratorId}),
+      });
+      const res = await data.json();
+
+      if (res.data == null) {
+        setEventDemonstrator("");
+      } else {
+        setEventDemonstrator(res.data.name);
+      }
+    } catch (error) {
+      console.log(error);
     }
-    const bodyData = {id: demonstratorId};
-
-    const data = await fetch("/api/post/get-user", {
-      method: "POST",
-      body: JSON.stringify(bodyData),
-    });
-    const res = await data.json();
-
-    console.log(res);
-
-    return res.id;
   };
 
   const getUserInfo = async () => {
@@ -81,6 +71,7 @@ const EventList = () => {
     const event = allEventsInfo?.find(({id}) => id == Number(e.currentTarget.id));
 
     if (event != null) {
+      getDemonstrator(Number(event.demonstrator_id));
       setEventInfo(event);
       setEventInfoStyling("visible");
     }
@@ -165,7 +156,7 @@ const EventList = () => {
               endTime={
                 eventInfo.end_time == null ? eventInfo.end_time : eventInfo.end_time.slice(0, 5)
               }
-              demonstrator={eventInfo.demonstrator_id == null ? "false" : "true"}
+              demonstrator={eventDemonstrator}
               product={eventInfo.product_name}
             />
           )}
