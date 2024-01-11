@@ -128,7 +128,7 @@ const Input = (props: InputProps) => {
     const { headline, value, wrapperClass, headlineClass, inputClass } = props;
     return (
       <div
-        className={`flex justify-between flex-wrap w-[8rem] text-black dark:text-white ${wrapperClass}`}
+        className={`flex justify-between flex-wrap w-[10rem] text-black dark:text-white ${wrapperClass}`}
       >
         <h3 className={`font-bold ${headlineClass}`}>{headline}:</h3>
         <p

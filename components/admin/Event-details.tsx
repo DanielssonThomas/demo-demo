@@ -82,15 +82,15 @@ const EventDetails = ({
         className="fixed w-[100vw] h-[100vh] top-0 left-0 bg-white dark:bg-black opacity-50 z-20"
         onClick={() => router.back()}
       />
-      <section className="fixed top-[12.5vh] right-[25vw] left-[25vw] bottom-0 w-1/2 h-3/4 border-[1px] border-solid border-black rounded-md bg-bg-light text-black dark:text-white p-4 z-40 bg-light-bg dark:bg-dark-bg">
+      <section className="fixed top-[10vh] right-[12.5vw] left-[12.5vw] bottom-0 w-3/4 xl:w-1/2 xl:left-[25vw] h-[80vh] border-[1px] border-solid border-black rounded-md bg-bg-light text-black dark:text-white p-4 z-40 bg-light-bg dark:bg-dark-bg">
         <div className="text-center">
           <h2 className="text-xl underline">CLIENT</h2>
         </div>
         <form
           action={(e) => updateEvent(e)}
-          className="flex flex-col justify-center items-center w-full"
+          className="flex flex-col justify-center items-center gap-6 w-full text-sm"
         >
-          <section className="flex flex-col gap-1 w-2/3 h-1/2">
+          <section className="flex flex-col gap-1 w-3/4 h-1/2">
             <input type="hidden" name="id" value={id} />
 
             <div className="flex justify-between w-full">

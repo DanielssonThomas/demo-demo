@@ -46,7 +46,7 @@ export const Events = ({ id }: EventsProps) => {
   }
 
   return (
-    <div className="w-full min-h-screen xl:overflow-scroll">
+    <div className="w-full h-full xl:overflow-scroll">
       {createEventActive && (
         <CreateEvent
           client_id={id}

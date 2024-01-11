@@ -48,7 +48,7 @@ export const CreateEvent = ({
         className="fixed w-[100vw] h-[100vh] top-0 left-0 bg-white dark:bg-black opacity-50 z-20"
         onClick={() => setPopUpActive(false)}
       />
-      <section className="fixed top-[16.5vh] right-[25vw] left-[25vw] bottom-0 w-1/2 h-3/4 border-[1px] border-solid border-black rounded-md bg-light-bg dark:bg-dark-bg text-black dark:text-white p-4 z-40">
+      <section className="fixed top-[16.5vh] right-[25vw] left-[10vw] md:left-[25vw] bottom-0 w-3/4 md:w-1/2 h-3/4 border-[1px] border-solid border-black rounded-md bg-light-bg dark:bg-dark-bg text-black dark:text-white p-4 z-40 text-sm">
         <div className="flex flex-col justify-center items-center gap-4">
           <h2 className="text-2xl">Create event for client</h2>
           <form action={createEvent} className="flex flex-col w-full gap-4">
@@ -76,7 +76,7 @@ export const CreateEvent = ({
               />
             </div>
 
-            <section className="flex gap-2 ">
+            <section className="flex flex-wrap gap-2 max-h-18">
               <Input type="date" headline="Date" name="date" value="" />
               <Input type="time" headline="Start time" name="time" value="" />
               <Input type="time" headline="End time" name="time" value="" />
@@ -125,7 +125,9 @@ export const CreateEvent = ({
                 min={0}
               />
             </div>
-            <PrimaryButton type="green" buttonText="Create event" />
+            <div className="absolute right-4 bottom-4">
+              <PrimaryButton type="green" buttonText="Create event" />
+            </div>
           </form>
         </div>
         {errorMessage === null ? (

@@ -9,8 +9,8 @@ type ClientProps = {
 
 export const Client = ({ id }: ClientProps) => {
   return (
-    <div className="flex flex-col p-4 bg-light-bg dark:bg-dark-bg text-black dark:text-white min-h-screen">
-      <div className="flex flex-col justify-center items-center xl:items-start min-h-screen xl:flex-row">
+    <div className="flex flex-col p-4 bg-light-bg dark:bg-dark-bg text-black dark:text-white min-h-screen xl:h-screen">
+      <div className="flex flex-col justify-center items-center xl:items-start min-h-screen xl:h-screen xl:flex-row">
         <section className="w-full sm:w-[60vw] md:w-[50vw] xl:w-[25vw]">
           <h2 className="text-center">Client</h2>
           <User id={id} />
