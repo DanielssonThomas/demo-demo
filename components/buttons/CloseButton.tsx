@@ -7,8 +7,9 @@ const CloseButton = ({
   className?: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }) => {
-  return <SecondaryButton className={className} buttonText="Close" onClick={onClick} />;
-
+  return (
+    <SecondaryButton className={className} type="default" buttonText="Close" onClick={onClick} />
+  );
 };
 
 export default CloseButton;
