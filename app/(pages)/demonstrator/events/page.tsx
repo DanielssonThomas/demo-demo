@@ -78,32 +78,25 @@ const Events = () => {
     }
   };
 
-  /* const SignUpDemonstrator = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-     if (eventInfo?.demonstrator_id != null) {
-       console.log("already has demonstrator");
-       return;
-     } else {
-       console.log("has no demonstrator");
-     }
+  const UnregisterDemonstrator = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const bodyData = {eventId: eventInfo?.id, userId: null, userName: userInfo.name};
 
-     const bodyData = {eventId: eventInfo?.id, userId: userInfo.id, userName: userInfo.name};
+    try {
+      const data = await fetch("/api/post/update-demonstrator", {
+        method: "POST",
+        body: JSON.stringify(bodyData),
+      });
+      const res = await data.json();
+    } catch (error) {
+      console.log(error);
+    }
 
-     try {
-       const data = await fetch("/api/post/update-demonstrator", {
-         method: "POST",
-         body: JSON.stringify(bodyData),
-       });
-       const res = await data.json();
-     } catch (error) {
-       console.log(error);
-     }
+    getAllEvents();
+    setEventInfoStyling("hidden");
+    setEventInfo(null);
 
-     getAllEvents();
-     setEventInfoStyling("hidden");
-     setEventInfo(null);
-
-     return;
-   }; */
+    return;
+  };
 
   return (
     <div>
@@ -163,11 +156,7 @@ const Events = () => {
             )}
 
             <div className="flex flex-row align-center justify-around">
-              <UnregisterButton
-                onClick={() => {
-                  console.log("hello");
-                }}
-              />
+              <UnregisterButton onClick={UnregisterDemonstrator} />
 
               <CloseButton
                 onClick={() => {

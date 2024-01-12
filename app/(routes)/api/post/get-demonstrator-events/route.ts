@@ -26,8 +26,6 @@ export async function POST(request: Request) {
     return NextResponse.json({data: null, error: true}, {status: 301});
   }
 
-  console.log(user);
-
   const {data: data}: {data: TableClientEvent[] | null} = await supabase
     .from("Event")
     .select("*, Location (*)")
