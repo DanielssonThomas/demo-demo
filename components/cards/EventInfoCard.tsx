@@ -23,39 +23,39 @@ const EventInfoCard = ({
 }) => {
   return (
     <div className={`p-6 ${className}`}>
-      <div>
+      <div className="flex flex-row align-center gap-6">
         <p>Client:</p>
         <p>{client}</p>
       </div>
-      <div>
+      <div className="flex flex-row align-center gap-6">
         <p>Location:</p>
         <p>{location}</p>
       </div>
-      <div>
+      <div className="flex flex-row align-center gap-6">
         <p>Address:</p>
         <p>{address}</p>
       </div>
-      <div>
+      <div className="flex flex-row align-center gap-6">
         <p>Date:</p>
         <p>{date}</p>
       </div>
-      <div>
+      <div className="flex flex-row align-center gap-6">
         <p>Starts:</p>
         <p>{startTime}</p>
       </div>
-      <div>
+      <div className="flex flex-row align-center gap-6">
         <p>Ends:</p>
         <p>{endTime}</p>
       </div>
-      <div>
+      <div className="flex flex-row align-center gap-6">
         <p>Demonstrator:</p>
         <p>{demonstrator}</p>
       </div>
-      <div>
+      <div className="flex flex-row align-center gap-6">
         <p>Product:</p>
         <p>{product}</p>
       </div>
-      <div>
+      <div className="flex flex-row align-center gap-6">
         <p>Supplier:</p>
         <p>{suplier}</p>
       </div>

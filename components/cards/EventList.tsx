@@ -161,7 +161,7 @@ const EventList = () => {
             />
           )}
 
-          <div>
+          <div className="flex flex-row align-center justify-around">
             {eventInfo?.demonstrator_id == null && userInfo.role == "admin" && (
               <SignupButton onClick={SignUpDemonstrator} className="" />
             )}
