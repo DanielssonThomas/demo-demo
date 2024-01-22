@@ -162,7 +162,7 @@ const EventList = () => {
           )}
 
           <div className="flex flex-row align-center justify-around">
-            {eventInfo?.demonstrator_id == null && userInfo.role == "admin" && (
+            {eventInfo?.demonstrator_id == null && userInfo.role == "demonstrator" && (
               <SignupButton onClick={SignUpDemonstrator} className="" />
             )}
 
