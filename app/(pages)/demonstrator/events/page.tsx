@@ -152,6 +152,19 @@ const Events = () => {
                 }
                 demonstrator={eventDemonstrator}
                 product={eventInfo.product_name}
+                stock={eventInfo.product_stock}
+                comment={eventInfo.comment}
+                travelCost={eventInfo.travels_cost}
+                unitsUsed={eventInfo.units_used}
+                action={() => {
+                  console.log("hello");
+                }}
+                onClick={() => {
+                  console.log("hello");
+                }}
+                onChange={() => {
+                  console.log("hello");
+                }}
               />
             )}
 

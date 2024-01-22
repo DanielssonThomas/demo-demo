@@ -33,7 +33,6 @@ const EventListItem = ({
       <TD type="default" text={location} />
       <TD type="default" text={date} />
       <TD type="default" text={`${startTime} - ${endTime}`} />
-      {/* <TD type="default" text={`${demonstrator}`} /> */}
       <TD type="boolean" boolean={demonstrator ?? false} text={demonstrator ? "yes" : "no"} />
     </tr>
   );
