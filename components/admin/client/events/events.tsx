@@ -11,7 +11,6 @@ export const Events = ({ id }: EventsProps) => {
   const [locations, setLocations] = useState<DBLocation[] | null>(null);
   const [deleteEventActive, setDeleteEventActive] = useState<boolean>(false);
   const [createEventActive, setCreateEventActive] = useState<boolean>(false);
-  const [refresh, setRefresh] = useState<boolean>(false);
 
   const getEvents = async () => {
     const data = await fetch("/api/post/get-event", {
@@ -38,8 +37,9 @@ export const Events = ({ id }: EventsProps) => {
   useEffect(() => {
     getEvents();
     getLocations();
-    if (refresh) setRefresh(false);
-  }, [deleteEventActive, createEventActive, refresh]);
+    if (deleteEventActive)
+      console.log("deleteEventActive :>> ", deleteEventActive);
+  }, [deleteEventActive, createEventActive]);
 
   if (loading && events === null) {
     return <LoadingAnim />;
@@ -75,7 +75,6 @@ export const Events = ({ id }: EventsProps) => {
           locations={locations}
           deleteEventActive={deleteEventActive}
           setDeleteEventActive={setDeleteEventActive}
-          setRefresh={setRefresh}
         />
       ))}
       <section

@@ -21,16 +21,34 @@ export const CreateEvent = ({
   const [formAddress, setFormAddress] = useState<string | null | undefined>(
     null
   );
-
-  useEffect(() => {
-    const address = locations?.find(
-      (location) => location.id === formLocationId
-    )?.address;
-    setFormAddress(address);
-  }, [formLocationId]);
+  const [formStartDate, setFormStartDate] = useState<string | null>(null);
+  const [formEndDate, setFormEndDate] = useState<string>("");
+  const [formDate, setFormDate] = useState<string | null>(null);
+  const [formComment, setFormComment] = useState<string>("");
+  const [formDemonstrator, setFormDemonstrator] = useState<string>("");
+  const [formDemonstrators, setFormDemonstrators] = useState<User[] | null>(
+    null
+  );
+  const [formTravelCost, setFormTravelCost] = useState<number>(0);
+  const [formProductStock, setFormProductStock] = useState<number>(0);
+  const [formUnitsUsed, setFormUnitsUsed] = useState<number>(0);
+  const [formSupplier, setFormSupplier] = useState<string>("");
+  const [formVerified, setFormVerified] = useState<boolean>(false);
+  const [formProductName, setFormProductName] = useState<string>("");
 
   const router = useRouter();
   const pathname = usePathname();
+
+  const getDemonstrators = async () => {
+    const data = await fetch("/api/get/demonstrators", {
+      method: "GET",
+    });
+    const res = await data.json();
+    if (res.error === null) router.push(pathname + "?e=" + res.error);
+    setFormDemonstrators(res.data);
+    setErrorMessage(res.message);
+  };
+
   const createEvent = async (e: FormData) => {
     const data = await fetch("/api/post/create-event", {
       method: "POST",
@@ -41,6 +59,14 @@ export const CreateEvent = ({
     if (res.error === null) router.push(pathname + "?e=" + res.error);
     setErrorMessage(res.message);
   };
+
+  useEffect(() => {
+    const address = locations?.find(
+      (location) => location.id === formLocationId
+    )?.address;
+    setFormAddress(address);
+    if (formDemonstrators === null) getDemonstrators();
+  }, [formLocationId]);
 
   return (
     <div className="absolute">
@@ -77,51 +103,97 @@ export const CreateEvent = ({
             </div>
 
             <section className="flex flex-wrap gap-2 max-h-18">
-              <Input type="date" headline="Date" name="date" value="" />
-              <Input type="time" headline="Start time" name="time" value="" />
-              <Input type="time" headline="End time" name="time" value="" />
+              <Input
+                type="date"
+                headline="Date"
+                name="date"
+                value={formDate ?? ""}
+                onChange={(e) => setFormDate(e.target.value)}
+              />
+              <Input
+                type="time"
+                headline="Start time"
+                name="time"
+                value={formStartDate ?? ""}
+                onChange={(e) => setFormStartDate(e.target.value)}
+              />
+              <Input
+                type="time"
+                headline="End time"
+                name="time"
+                value={formEndDate}
+                onChange={(e) => setFormEndDate(e.target.value)}
+              />
             </section>
 
             <div className="flex flex-col gap-2 w-[25vw]">
+              <div className="flex gap-4">
+                <label htmlFor="demonstrator_id" className="font-bold">
+                  Demonstrator:
+                </label>
+                <select
+                  name="demonstrator_id"
+                  className="border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg"
+                  onChange={(e) => setFormDemonstrator(e.target.value)}
+                >
+                  <option value={"null"}>None</option>
+                  {formDemonstrators?.map((demonstrator) => (
+                    <option value={demonstrator.id ?? ""}>
+                      {demonstrator.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
               <Input
                 type="text"
-                headline="Demonstrator"
-                name="demonstrator"
-                value=""
+                headline="Comment"
+                name="comment"
+                value={formComment}
+                onChange={(e) => setFormComment(e.target.value)}
               />
-              <Input type="text" headline="Comment" name="comment" value="" />
               <Input
                 type="number"
                 headline="Travel cost"
                 name="travel_cost"
-                value={0}
+                value={formTravelCost}
+                onChange={(e) => setFormTravelCost(parseInt(e.target.value))}
                 min={0}
               />
               <Input
                 type="checkbox"
                 headline="Verified"
                 name="verified"
-                isChecked={false}
+                isChecked={formVerified}
+                onClick={(e) => setFormVerified(!formVerified)}
               />
               <Input
                 type="text"
                 headline="Product Name"
                 name="product_name"
-                value=""
+                value={formProductName}
+                onChange={(e) => setFormProductName(e.target.value)}
               />
-              <Input type="text" headline="Supplier" name="supplier" value="" />
+              <Input
+                type="text"
+                headline="Supplier"
+                name="supplier"
+                value={formSupplier}
+                onChange={(e) => setFormSupplier(e.target.value)}
+              />
               <Input
                 type="number"
                 headline="Product stock"
                 name="product_stock"
-                value={0}
+                value={formProductStock}
+                onChange={(e) => setFormProductStock(parseInt(e.target.value))}
                 min={0}
               />
               <Input
                 type="number"
                 headline="Units used"
                 name="units_used"
-                value={0}
+                value={formUnitsUsed}
+                onChange={(e) => setFormUnitsUsed(parseInt(e.target.value))}
                 min={0}
               />
             </div>
@@ -130,13 +202,6 @@ export const CreateEvent = ({
             </div>
           </form>
         </div>
-        {errorMessage === null ? (
-          <></>
-        ) : (
-          <p className="text-red-500 text-center absolute -bottom-8 w-[10vw] left-[7vw]">
-            Error on upload: {errorMessage}
-          </p>
-        )}
       </section>
     </div>
   );

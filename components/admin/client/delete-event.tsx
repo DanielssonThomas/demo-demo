@@ -24,7 +24,11 @@ export const DeleteEvent = ({ id, setDeleteEventActive }: DeleteEvent) => {
     <div className="absolute">
       <div
         className="fixed w-[100vw] h-[100vh] top-0 left-0 bg-white dark:bg-black opacity-50 z-20"
-        onClick={() => router.refresh()}
+        onClick={(e: any) => {
+          e.preventDefault();
+          console.log("clicked exit");
+          setDeleteEventActive(false);
+        }}
       />
       <section className="fixed top-[37.5vh] right-[37.5vw] left-[25vw] md:left-[20vw] xl:left-[37.5vw] bottom-0 w-1/2 md:w-3/5 xl:w-1/4 h-1/4 border-[1px] border-solid border-black rounded-md bg-light-bg dark:bg-dark-bg p-4 z-40 text-black dark:text-white">
         <div className="flex flex-col justify-center items-center gap-8">

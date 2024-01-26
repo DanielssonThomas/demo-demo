@@ -8,7 +8,7 @@ export async function POST(request: Request) {
   const supabase = createClient(cookies());
   const location_id = parseInt(reqFormData.get("location_id") as string);
   const client = reqFormData.get("client_name");
-  const demostrator = reqFormData.get("demonstrator");
+  const demonstrator_id = reqFormData.get("demonstrator_id");
   const comment = reqFormData.get("comment");
   const travel_cost = parseInt(reqFormData.get("travel_cost") as string);
   const verified = reqFormData.get("verified");
@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     await supabase.from("Event").insert({
       location_id: location_id,
       client: client,
-      demonstrator: demostrator,
+      demonstrator_id: demonstrator_id !== "null" ? demonstrator_id : null,
       comment: comment,
       travels_cost: travel_cost,
       verified: verified,

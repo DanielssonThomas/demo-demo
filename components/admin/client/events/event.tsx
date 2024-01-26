@@ -22,7 +22,6 @@ type EventProps = {
   locations: DBLocation[] | null;
   deleteEventActive: boolean;
   setDeleteEventActive: React.Dispatch<React.SetStateAction<boolean>>;
-  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const Event = ({
@@ -43,7 +42,6 @@ export const Event = ({
   locations,
   deleteEventActive,
   setDeleteEventActive,
-  setRefresh,
 }: EventProps) => {
   const router = useRouter();
   const pathname = usePathname();
@@ -55,6 +53,7 @@ export const Event = ({
   const [endTime, setEndTime] = useState<string | null>(end_time);
   const [formVerified, setFormVerified] = useState<boolean | null>(verified);
   const [formActive, setFormActive] = useState<boolean | null>(active);
+  const [formUnitsUsed, setFormUnitsUsed] = useState<number>(units_used ?? 0);
 
   const [selectedFormLocationId, setSelectedFormLocationId] = useState<
     number | null
@@ -91,7 +90,6 @@ export const Event = ({
     });
     const res = await data.json();
     router.push(pathname + `?` + "e=" + res.error);
-    setRefresh(true);
   };
 
   return (
@@ -175,9 +173,10 @@ export const Event = ({
           type="number"
           headline="Units used"
           name="units_used"
-          value={units_used ?? 0}
+          value={formUnitsUsed}
           min={0}
           max={product_stock}
+          onChange={(e) => setFormUnitsUsed(parseInt(e.target.value))}
         />
       </section>
       <Input

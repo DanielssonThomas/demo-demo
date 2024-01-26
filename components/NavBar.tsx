@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import {useEffect, useState} from "react";
-import {usePathname} from "next/navigation";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import LogOutButton from "./buttons/LogoutButton";
 import PrimaryLink from "./links/PrimaryLink";
 import SetTheme from "./SetTheme";
@@ -36,12 +36,22 @@ const NavBar = () => {
     <nav className="px-6 py-4 flex gap-6 align-center border-solid border-black dark:border-white border-b-[0.1px]">
       <PrimaryLink type="default" href={"/dashboard"} linkText="Home" />
       {userRole == "client" && (
-        <PrimaryLink type="default" href={"/client/create-event"} linkText="Create event" />
+        <PrimaryLink
+          type="default"
+          href={"/client/create-event"}
+          linkText="Create event"
+        />
       )}
       {userRole == "demonstrator" && (
-        <PrimaryLink type="default" href={"/demonstrator/events"} linkText="My events" />
+        <PrimaryLink
+          type="default"
+          href={"/demonstrator/events"}
+          linkText="My events"
+        />
       )}
-      {userRole == "admin" && <PrimaryLink type="default" href={"/admin"} linkText="Admin page" />}
+      {userRole == "admin" && (
+        <PrimaryLink type="default" href={"/admin"} linkText="Admin page" />
+      )}
       <form action={SetTheme}>
         <PrimaryButton type="default" buttonText="Switch theme" />
       </form>

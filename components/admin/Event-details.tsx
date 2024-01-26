@@ -50,6 +50,7 @@ const EventDetails = ({
   const [formVerified, setFormVerified] = useState<boolean | null>(verified);
   const [formActive, setFormActive] = useState<boolean | null>(active);
   const [formComment, setFormComment] = useState<string | null>(comment);
+  const [formUnitsUsed, setFormUnitsUsed] = useState<number>(units_used ?? 0);
 
   const getLocations = async () => {
     const LocationsData = await fetch("/api/get/locations", {
@@ -108,7 +109,10 @@ const EventDetails = ({
                 name="location_id"
                 className="border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg"
                 onChange={(e) => {
-                  setFormAddress(e.target.value);
+                  const selectedLocation = locations?.find(
+                    (location) => location.id === parseInt(e.target.value)
+                  );
+                  setFormAddress(selectedLocation?.address ?? "");
                 }}
               >
                 {locations?.map((loc) => (
@@ -153,9 +157,10 @@ const EventDetails = ({
               type="number"
               headline="Units used"
               name="units_used"
-              value={units_used ?? 0}
+              value={formUnitsUsed}
               min={0}
               max={product_stock}
+              onChange={(e) => setFormUnitsUsed(parseInt(e.target.value))}
             />
 
             <Input

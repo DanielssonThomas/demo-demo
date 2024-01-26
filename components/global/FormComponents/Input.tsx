@@ -49,6 +49,7 @@ type InputNumberProps = {
   wrapperClass?: string;
   headlineClass?: string;
   inputClass?: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
 };
 
 type InputTextAreaProps = {
@@ -221,6 +222,7 @@ const Input = (props: InputProps) => {
       min,
       max,
       wrapperClass,
+      onChange,
     } = props;
     return (
       <div
@@ -232,7 +234,8 @@ const Input = (props: InputProps) => {
           name={name}
           min={min}
           max={max}
-          value={value ?? 0}
+          value={value}
+          onChange={onChange}
           className="pl-2 border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg"
         />
       </div>

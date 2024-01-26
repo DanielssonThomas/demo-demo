@@ -2,6 +2,7 @@
 import { redirect } from "next/navigation";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import PrimaryButton from "../buttons/PrimaryButton";
 
 const UserSetup = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -19,7 +20,7 @@ const UserSetup = () => {
   return (
     <div className="absolute">
       <div className="fixed w-screen h-screen bg-[#EDEDED] opacity-25" />
-      <section className="fixed top-[16.5vh] right-[12.5vw] left-[12.5vw] bottom-0 w-3/4 h-3/4 border-solid border-black rounded-md bg-[#EDEDED] text-black p-4">
+      <section className="fixed top-[30vh] right-[12.5vw] left-[30vw] bottom-0 w-2/5 h-2/5 border-solid border-black rounded-md bg-[#EDEDED] text-black p-4">
         <form
           action={registerUser}
           className="flex flex-col gap-4 w-full h-full"
@@ -38,19 +39,14 @@ const UserSetup = () => {
           <div>
             <h3 className="text-sm">Select role:</h3>
             <select
-              className="border-[1px] border-solid border-black dark:border-white dark:text-white rounded-sm bg-light-bg dark:bg-dark-bg"
+              className="w-full px-2 border-[1px] border-solid border-black rounded-sm bg-dark-bg dark:bg-light-bg"
               name="role"
             >
               <option value="client">Client</option>
               <option value="demonstrator">Demonstrator</option>
             </select>
           </div>
-          <button>Send</button>
-          {errorMessage === "" ? (
-            <></>
-          ) : (
-            <p className="text-red-500 text-center">Name already exists</p>
-          )}
+          <PrimaryButton type="default" buttonText="send" />
         </form>
       </section>
     </div>
